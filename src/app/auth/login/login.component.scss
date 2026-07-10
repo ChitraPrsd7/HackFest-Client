@@ -1,12 +1,9 @@
-/* ============================================================
-   NEPAL GOVERNMENT & NAGARIK PORTAL - HACKATHON-GRADE UI
-   ============================================================ */
+
 
 .gov-auth-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* Premium official gradient combining Nepalese flag blue and deep dark slate */
   background: radial-gradient(circle at top left, #1e3a8a 0%, #0b0f19 60%, #580c1f 120%);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #f1f5f9;
@@ -25,7 +22,6 @@
   }
 }
 
-/* ─── Immersive Background Shapes ─── */
 .bg-gradient-shapes {
   position: absolute;
   inset: 0;
@@ -419,6 +415,100 @@
   
   .sep { opacity: 0.3; }
   a:hover { color: #3b82f6; }
+}
+
+/* ─── OR Divider ─── */
+.gov-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 2px;
+}
+
+.gov-divider-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.gov-divider-text {
+  font-size: 10px;
+  font-weight: 600;
+  color: #475569;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* ─── 1ID Nepal Button ─── */
+.gov-btn-oneid {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(220, 38, 38, 0.08), rgba(239, 68, 68, 0.12));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  &:hover {
+    border-color: rgba(220, 38, 38, 0.6);
+    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.2);
+    transform: translateY(-1px);
+
+    &::before { opacity: 1; }
+
+    .oneid-arrow {
+      transform: translateX(4px);
+      color: #ef4444;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.oneid-label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.oneid-main {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1.2;
+}
+
+.oneid-sub {
+  font-size: 9px;
+  font-weight: 500;
+  color: #94a3b8;
+  line-height: 1.2;
+  margin-top: 1px;
+}
+
+.oneid-arrow {
+  color: #64748b;
+  flex-shrink: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (max-width: 640px) {

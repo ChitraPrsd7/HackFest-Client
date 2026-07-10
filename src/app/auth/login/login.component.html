@@ -106,6 +106,28 @@
         </button>
       </form>
 
+      <!-- Divider -->
+      <div class="gov-divider">
+        <span class="gov-divider-line"></span>
+        <span class="gov-divider-text">वा / OR</span>
+        <span class="gov-divider-line"></span>
+      </div>
+
+      <!-- 1ID Nepal Login Button -->
+      <button type="button" class="gov-btn-oneid" (click)="loginWith1ID()" id="btn-oneid-nepal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="18" height="18" rx="4" fill="#dc2626"/>
+          <text x="12" y="16" text-anchor="middle" fill="white" font-size="10" font-weight="900" font-family="Inter, sans-serif">1ID</text>
+        </svg>
+        <span class="oneid-label">
+          <span class="oneid-main">Login with 1ID Nepal</span>
+          <span class="oneid-sub">राष्ट्रिय डिजिटल पहिचान</span>
+        </span>
+        <svg class="oneid-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+
       <div class="gov-card-footer">
         <span>Don't have a citizen account?</span>
         <button type="button" class="gov-link-btn" (click)="goToRegister()">Register Citizen Account</button>

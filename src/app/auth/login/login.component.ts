@@ -60,6 +60,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  loginWith1ID(): void {
+    // Redirect to Nepal's 1ID national digital identity SSO
+    // Replace this URL with the actual 1ID OAuth endpoint when available
+    const oneIdUrl = 'https://auth.1id.gov.np/oauth2/authorize';
+    window.location.href = oneIdUrl;
+  }
+
   goToRegister(): void {
     this.router.navigate(['/auth/register']);
   }
