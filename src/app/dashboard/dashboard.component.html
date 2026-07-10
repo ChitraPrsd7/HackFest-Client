@@ -1,0 +1,365 @@
+<div class="console-layout" [class.sidebar-collapsed]="isSidebarCollapsed">
+  
+  <!-- Immersive background elements -->
+  <div class="bg-gradient-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+  </div>
+
+  <!-- ══════════ TOP NAVIGATION BAR (Premium Glassmorphism Console) ══════════ -->
+  <header class="console-header">
+    <div class="header-left">
+      <button class="menu-btn" (click)="toggleSidebar()" aria-label="Toggle Sidebar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      
+      <!-- Brand Logo -->
+      <div class="brand">
+        <div class="nepal-emblem-mini">
+          <svg class="gov-flag" width="16" height="20" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2L22 14.5H12L22 28.5H2Z" fill="#E11D48" stroke="#2563EB" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M6 8A2.5 2.5 0 0 0 11 8A2.5 2.5 0 0 1 6 8" fill="#FFFFFF"/>
+            <circle cx="8" cy="20" r="2.5" fill="#FFFFFF"/>
+          </svg>
+        </div>
+        <span class="brand-title">नागरिक एप <span class="brand-subtitle">Console</span></span>
+      </div>
+
+      <!-- Project Selector -->
+      <div class="project-selector">
+        <svg class="project-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        <span class="project-name">{{ selectedProject }}</span>
+        <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Right Controls -->
+    <div class="header-right">
+      <div class="search-bar-wrap">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="header-search" placeholder="Search resources, services...">
+      </div>
+
+      <div class="header-actions">
+        <button class="icon-btn" title="Notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="badge">3</span>
+        </button>
+
+        <span class="header-divider"></span>
+
+        <!-- User profile -->
+        <div class="user-menu">
+          <div class="user-avatar">
+            <span>GO</span>
+          </div>
+          <div class="user-details">
+            <span class="user-name">Gaurav Oli</span>
+            <span class="user-role">Super Admin</span>
+          </div>
+          <button class="logout-btn" (click)="logout()" title="Sign Out">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="console-body">
+    
+    <!-- ══════════ SIDEBAR NAVIGATION ══════════ -->
+    <aside class="console-sidebar">
+      <nav class="sidebar-nav">
+        
+        <div class="nav-section">
+          <span class="nav-section-title">CONTROL ROOM</span>
+          <a class="nav-item" [class.active]="currentTab === 'overview'" (click)="currentTab = 'overview'">
+            <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="9"></rect>
+              <rect x="14" y="3" width="7" height="5"></rect>
+              <rect x="14" y="12" width="7" height="9"></rect>
+              <rect x="3" y="16" width="7" height="5"></rect>
+            </svg>
+            <span class="nav-label">Console Overview</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <span class="nav-section-title">OPERATIONS</span>
+          <a class="nav-item" [class.active]="currentTab === 'citizens'" (click)="currentTab = 'citizens'">
+            <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+            </svg>
+            <span class="nav-label">Citizen Directory</span>
+          </a>
+
+          <a class="nav-item" [class.active]="currentTab === 'requests'" (click)="currentTab = 'requests'">
+            <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            <span class="nav-label">Verification Queue</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <span class="nav-section-title">CONFIGURATION</span>
+          <a class="nav-item" [class.active]="currentTab === 'wards'" (click)="currentTab = 'wards'">
+            <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span class="nav-label">Local Wards Config</span>
+          </a>
+
+          <a class="nav-item" [class.active]="currentTab === 'settings'" (click)="currentTab = 'settings'">
+            <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            <span class="nav-label">Settings</span>
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- ══════════ MAIN WORKSPACE CONTENT ══════════ -->
+    <main class="console-content">
+      
+      <!-- Top Action Ribbon -->
+      <section class="content-header">
+        <div class="breadcrumb-container">
+          <span class="breadcrumb-root">Console</span>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-active">Dashboard</span>
+        </div>
+        
+        <div class="action-bar">
+          <button class="btn btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Export Sheet
+          </button>
+          
+          <button class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            New Registration
+          </button>
+        </div>
+      </section>
+
+      <!-- Welcome Glass Hero Banner -->
+      <section class="welcome-banner-card">
+        <div class="banner-overlay-grid"></div>
+        <div class="banner-text">
+          <h2>प्रणाली नियन्त्रण कक्ष (Central Ops Console)</h2>
+          <p>Government authorization, identity verifications, and ward synchronizations portal.</p>
+        </div>
+        <div class="banner-badge">
+          <span class="pulse-dot"></span>
+          KATHMANDU CENTRAL REGISTRY
+        </div>
+      </section>
+
+      <!-- Stats Grid (Premium Cards) -->
+      <section class="stats-grid">
+        
+        <!-- Stats Card 1 -->
+        <div class="stat-card">
+          <div class="card-glow"></div>
+          <div class="card-body">
+            <div class="stat-meta">
+              <span class="stat-title">Total Citizens</span>
+              <span class="stat-badge success">+4.8%</span>
+            </div>
+            <div class="stat-value">{{ stats.totalCitizens | number }}</div>
+            <div class="stat-bar-track">
+              <div class="stat-bar-fill fill-blue" style="width: 78%"></div>
+            </div>
+            <div class="stat-footer-text">78% target density reached</div>
+          </div>
+        </div>
+
+        <!-- Stats Card 2 -->
+        <div class="stat-card">
+          <div class="card-glow"></div>
+          <div class="card-body">
+            <div class="stat-meta">
+              <span class="stat-title">Integrity Ratio</span>
+              <span class="stat-badge info">Active</span>
+            </div>
+            <div class="stat-value">{{ stats.verifiedPercentage }}%</div>
+            <div class="stat-bar-track">
+              <div class="stat-bar-fill fill-cyan" style="width: 94%"></div>
+            </div>
+            <div class="stat-footer-text">NITC compliance matched</div>
+          </div>
+        </div>
+
+        <!-- Stats Card 3 -->
+        <div class="stat-card">
+          <div class="card-glow"></div>
+          <div class="card-body">
+            <div class="stat-meta">
+              <span class="stat-title">Pending Tasks</span>
+              <span class="stat-badge warning">Action Required</span>
+            </div>
+            <div class="stat-value">{{ stats.pendingVerifications | number }}</div>
+            <div class="stat-bar-track">
+              <div class="stat-bar-fill fill-orange" style="width: 32%"></div>
+            </div>
+            <div class="stat-footer-text">32% review queue active</div>
+          </div>
+        </div>
+
+        <!-- Stats Card 4 -->
+        <div class="stat-card">
+          <div class="card-glow"></div>
+          <div class="card-body">
+            <div class="stat-meta">
+              <span class="stat-title">Active Services</span>
+              <span class="stat-badge success">Online</span>
+            </div>
+            <div class="stat-value">{{ stats.servicesActive }}</div>
+            <div class="stat-bar-track">
+              <div class="stat-bar-fill fill-green" style="width: 100%"></div>
+            </div>
+            <div class="stat-footer-text">100% gateway connectivity</div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Main Datatable & Console Feeds -->
+      <section class="content-body-grid">
+        
+        <!-- Table Console Card -->
+        <div class="card main-table-card">
+          <div class="card-header">
+            <div class="header-txt">
+              <h3>Citizenship Verification Queue</h3>
+              <span class="card-subtitle">Pending physical verification matching from localized servers</span>
+            </div>
+            <div class="header-action-wrap">
+              <input type="text" class="table-search" placeholder="Filter requests...">
+            </div>
+          </div>
+          <div class="card-body no-padding">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Citizen Details</th>
+                  <th>Requested Service</th>
+                  <th>Origin Ward</th>
+                  <th>Status</th>
+                  <th>Verification Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let req of recentRequests">
+                  <td class="font-mono text-bold text-blue">{{ req.id }}</td>
+                  <td>
+                    <div class="citizen-cell">
+                      <div class="avatar-circle">
+                        <span>{{ req.name.charAt(0) }}</span>
+                      </div>
+                      <div class="citizen-info">
+                        <span class="citizen-name">{{ req.name }}</span>
+                        <span class="citizen-sub">Submit: {{ req.date }}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="service-pill">{{ req.service }}</span>
+                  </td>
+                  <td class="font-mono">Ward {{ req.ward }}</td>
+                  <td>
+                    <span class="status-badge" [class.badge-success]="req.status === 'Approved'" [class.badge-warning]="req.status === 'Pending'" [class.badge-danger]="req.status === 'Rejected'">
+                      {{ req.status }}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="table-actions">
+                      <button class="table-btn text-success" title="Approve Request">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </button>
+                      <button class="table-btn text-danger" title="Reject Request">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Activity Timeline -->
+        <div class="card logs-sidebar-card">
+          <div class="card-header">
+            <h3>System Operations Log</h3>
+            <span class="card-subtitle">Recent secure entries & access logs</span>
+          </div>
+          <div class="card-body">
+            <ul class="activity-timeline">
+              <li class="timeline-item item-blue">
+                <span class="timeline-time">10 mins ago</span>
+                <p class="timeline-desc"><strong>Ward 4 admin</strong> synced citizen record Ram Thapa.</p>
+              </li>
+              <li class="timeline-item item-green">
+                <span class="timeline-time">1 hour ago</span>
+                <p class="timeline-desc"><strong>API service</strong> compiled summary report for Home Ministry.</p>
+              </li>
+              <li class="timeline-item item-orange">
+                <span class="timeline-time">3 hours ago</span>
+                <p class="timeline-desc"><strong>Endpoint update</strong> National ID verifier modified.</p>
+              </li>
+              <li class="timeline-item item-grey">
+                <span class="timeline-time">Yesterday</span>
+                <p class="timeline-desc"><strong>NITC server</strong> database compilation compiled.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</div>

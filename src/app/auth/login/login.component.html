@@ -1,169 +1,145 @@
-<div class="auth-shell">
+<div class="gov-auth-container">
+  
+  <!-- Immersive background elements -->
+  <div class="bg-gradient-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
 
-  <!-- ══════════ LEFT PANEL ══════════ -->
-  <aside class="left-panel">
-    <!-- Animated background grid -->
-    <div class="grid-bg"></div>
-    <div class="glow-orb glow-orb--1"></div>
-    <div class="glow-orb glow-orb--2"></div>
-
-    <div class="left-content">
-      <!-- Logo / Brand -->
-      <div class="brand">
-        <div class="brand-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 2L4 8V16C4 22.627 9.373 28 16 30C22.627 28 28 22.627 28 16V8L16 2Z" fill="url(#shield-grad)" stroke="#06B6D4" stroke-width="1.5"/>
-            <path d="M12 16L15 19L21 13" stroke="#E6EDF3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <defs>
-              <linearGradient id="shield-grad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#1C2333"/>
-                <stop offset="100%" stop-color="#0D1117"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div class="brand-text">
-          <span class="brand-name">ORCHID</span>
-          <span class="brand-tag">SERVER PORTAL</span>
-        </div>
+  <!-- Top bar with clean layout (No language switcher) -->
+  <header class="gov-topbar">
+    <div class="gov-logo-area">
+      <!-- Accurate Double-Triangle Flag of Nepal SVG -->
+      <svg class="gov-flag" width="26" height="32" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2L22 14.5H12L22 28.5H2Z" fill="#E11D48" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M6 8A2.5 2.5 0 0 0 11 8A2.5 2.5 0 0 1 6 8" fill="#FFFFFF"/>
+        <circle cx="8" cy="20" r="2.5" fill="#FFFFFF"/>
+      </svg>
+      <div class="gov-txt">
+        <span class="gov-org-ne">नेपाल सरकार</span>
+        <span class="gov-org-ministry">सञ्चार तथा सूचना प्रविधि मन्त्रालय</span>
       </div>
-
-      <!-- Tagline -->
-      <div class="tagline-block">
-        <h1 class="tagline-title">Secure Access<br>Control Center</h1>
-        <p class="tagline-sub">Authorized personnel only. All sessions are monitored and recorded for security compliance.</p>
-      </div>
-
-      <!-- Feature highlights -->
-      <!-- <div class="feature-list">
-        <div class="feature-item">
-          <span class="feature-icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1L2 4v5c0 3.5 2.7 6.2 6 7 3.3-.8 6-3.5 6-7V4L8 1z" stroke="#06B6D4" stroke-width="1.4" stroke-linejoin="round"/></svg>
-          </span>
-          <span>Role-based access control</span>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#06B6D4" stroke-width="1.4"/><path d="M8 5v3l2 2" stroke="#06B6D4" stroke-width="1.4" stroke-linecap="round"/></svg>
-          </span>
-          <span>Real-time community monitoring</span>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#06B6D4" stroke-width="1.4"/><path d="M5 7h6M5 10h4" stroke="#06B6D4" stroke-width="1.4" stroke-linecap="round"/></svg>
-          </span>
-          <span>Centralized content management</span>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8a5 5 0 1010 0A5 5 0 003 8zM8 5v3l1.5 1.5" stroke="#06B6D4" stroke-width="1.4" stroke-linecap="round"/></svg>
-          </span>
-          <span>Activity logs & audit trails</span>
-        </div>
-      </div> -->
     </div>
-  </aside>
+    
+    <div class="gov-topbar-actions">
+      <div class="support-info">
+        <span class="support-label">आधिकारिक पोर्टल</span>
+      </div>
+    </div>
+  </header>
 
-  <!-- ══════════ RIGHT PANEL ══════════ -->
-  <main class="right-panel">
-    <div class="form-card" [class.card--loading]="isLoading">
-
-      <!-- Card header -->
-      <div class="card-header">
-        <p class="card-eyebrow mono-label">SECURE ACCESS</p>
-        <h2 class="card-title">Sign in to Server</h2>
-        <p class="card-desc">Enter your administrator credentials to continue</p>
+  <!-- Centered Login Card with Glassmorphism -->
+  <main class="gov-auth-content">
+    <div class="gov-auth-card">
+      
+      <div class="gov-card-header">
+        <div class="gov-emblem-wrap">
+          <div class="emblem-hex">
+            <!-- Accurate Emblem Representation inside Card Hex -->
+            <svg width="40" height="40" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 2L22 14.5H12L22 28.5H2Z" fill="#E11D48" stroke="#2563EB" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M6 8A2.5 2.5 0 0 0 11 8A2.5 2.5 0 0 1 6 8" fill="#FFFFFF"/>
+              <circle cx="8" cy="20" r="2.5" fill="#FFFFFF"/>
+            </svg>
+          </div>
+        </div>
+        <h1 class="portal-title">नागरिक एप प्रणाली</h1>
+        <h2 class="portal-subtitle">Administrative Console</h2>
       </div>
 
-      <!-- Error alert -->
-      <div class="alert alert--error" *ngIf="loginError">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 5v3M8 11h.01M1.5 13.5h13l-6.5-11-6.5 11z" stroke="#F85149" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        {{ loginError }}
+      <!-- Compact error message -->
+      <div class="gov-alert alert-error" *ngIf="loginError">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>{{ loginError }}</span>
       </div>
 
-      <!-- Form -->
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form" novalidate>
-
-        <!-- Email -->
-        <div class="field-group" [class.field--error]="email.invalid && email.touched" [class.field--valid]="email.valid && email.touched">
-          <label class="field-label" for="email">Email Address</label>
-          <div class="input-wrap">
-            <span class="input-icon">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4l6 5 6-5M2 4h12v9H2V4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="gov-form" novalidate>
+        
+        <!-- Email Input (No placeholder) -->
+        <div class="gov-field-group" [class.field-error]="email.invalid && email.touched">
+          <label class="gov-label" for="email">कार्यालय ईमेल (Official Email)</label>
+          <div class="gov-input-container">
             <input
               id="email"
               type="email"
-              class="field-input"
+              class="gov-input"
               formControlName="email"
-              placeholder=""
               autocomplete="email"
             />
+            <span class="input-glow-border"></span>
           </div>
-          <span class="field-error" *ngIf="email.invalid && email.touched">
-            <span *ngIf="email.errors?.['required']">Email is required</span>
-            <span *ngIf="email.errors?.['email']">Enter a valid email address</span>
-          </span>
+          <p class="gov-error-text" *ngIf="email.invalid && email.touched">Enter a valid official email address</p>
         </div>
 
-        <!-- Password -->
-        <div class="field-group" [class.field--error]="password.invalid && password.touched" [class.field--valid]="password.valid && password.touched">
-          <label class="field-label" for="password">Password</label>
-          <div class="input-wrap">
-            <span class="input-icon">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="7" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M5 7V5a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </span>
+        <!-- Password Input (No placeholder) -->
+        <div class="gov-field-group" [class.field-error]="password.invalid && password.touched">
+          <label class="gov-label" for="password">पासवर्ड (Password)</label>
+          <div class="gov-input-container">
             <input
               id="password"
               [type]="showPassword ? 'text' : 'password'"
-              class="field-input"
+              class="gov-input"
               formControlName="password"
-              placeholder=""
               autocomplete="current-password"
             />
-            <button type="button" class="input-toggle" (click)="togglePassword()" [title]="showPassword ? 'Hide password' : 'Show password'">
-              <svg *ngIf="!showPassword" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3C4.5 3 1.5 8 1.5 8S4.5 13 8 13s6.5-5 6.5-5S11.5 3 8 3z" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
-              <svg *ngIf="showPassword" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2l12 12M6.5 6.6A2 2 0 0010 10M4 4.3C2.7 5.4 1.5 8 1.5 8S4.5 13 8 13c1.3 0 2.5-.4 3.5-1.1M7 3.1C7.3 3 7.7 3 8 3c3.5 0 6.5 5 6.5 5s-.7 1.4-2 2.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span class="input-glow-border"></span>
+            <button type="button" class="gov-pw-toggle" (click)="togglePassword()">
+              {{ showPassword ? 'Hide' : 'Show' }}
             </button>
           </div>
-          <span class="field-error" *ngIf="password.invalid && password.touched">
-            <span *ngIf="password.errors?.['required']">Password is required</span>
-            <span *ngIf="password.errors?.['minlength']">Minimum 6 characters required</span>
-          </span>
+          <p class="gov-error-text" *ngIf="password.invalid && password.touched">Password is required</p>
         </div>
 
-        <!-- Remember + Forgot -->
-        <div class="form-row">
-          <label class="checkbox-wrap">
-            <input type="checkbox" id="remember" formControlName="remember" class="checkbox-input" />
-            <span class="checkbox-custom"></span>
-            <span class="checkbox-label">Remember this device</span>
+        <!-- Remember / Forgot -->
+        <div class="gov-form-options">
+          <label class="gov-checkbox-label">
+            <input type="checkbox" formControlName="remember" class="gov-checkbox">
+            <span class="gov-checkbox-txt">Keep me signed in</span>
           </label>
-          <a href="#" class="forgot-link">Forgot password?</a>
+          <a href="#" class="gov-forgot-link">Forgot password?</a>
         </div>
 
-        <!-- Submit -->
-        <button type="submit" id="login-submit" class="btn-primary" [disabled]="isLoading">
-          <span class="btn-text" *ngIf="!isLoading">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 8H2M8 6l2 2-2 2M13 3v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Sign In to Server
+        <!-- Submit Button -->
+        <button type="submit" class="gov-btn-submit" [disabled]="isLoading">
+          <span class="btn-content" *ngIf="!isLoading">
+            Secure Sign In
           </span>
-          <span class="btn-loader" *ngIf="isLoading">
-            <span class="spinner"></span>
-            Authenticating...
+          <span class="btn-loading-content" *ngIf="isLoading">
+            <span class="gov-spinner"></span>
+            Verifying...
           </span>
         </button>
-
       </form>
 
-      <!-- Footer -->
-      <div class="card-footer">
-        <p class="footer-text">Need server access?
-          <button type="button" class="link-btn" (click)="goToRegister()">Request Access</button>
-        </p>
+      <div class="gov-card-footer">
+        <span>Need administrative access?</span>
+        <button type="button" class="gov-link-btn" (click)="goToRegister()">Register Office Account</button>
       </div>
 
     </div>
+
+    <!-- Security statement -->
+    <div class="gov-security-warning">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      <span>Authorized usage is logged under cybersecurity regulations.</span>
+    </div>
   </main>
+
+  <footer class="gov-footer">
+    <p>© २०२६ सञ्चार तथा सूचना प्रविधि मन्त्रालय, नेपाल सरकार</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <span class="sep">•</span>
+      <a href="#">Terms</a>
+    </div>
+  </footer>
 
 </div>

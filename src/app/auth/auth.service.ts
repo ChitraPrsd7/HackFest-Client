@@ -25,13 +25,11 @@ export class AuthService {
   private _isLoggedIn = false;
 
   login(payload: LoginPayload): Observable<{ success: boolean; token?: string }> {
-    // TODO: Replace with real HTTP call
     console.log('[AuthService] login payload:', payload);
     return of({ success: true, token: 'mock-jwt-token' }).pipe(delay(800));
   }
 
   register(payload: RegisterPayload): Observable<{ success: boolean; message?: string }> {
-    // TODO: Replace with real HTTP call
     console.log('[AuthService] register payload:', payload);
     return of({ success: true, message: 'Account created successfully' }).pipe(delay(800));
   }

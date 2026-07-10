@@ -50,8 +50,7 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         this.isLoading = false;
         if (res.success) {
-          // TODO: navigate to dashboard
-          console.log('[Login] Success — token:', res.token);
+          this.router.navigate(['/dashboard']);
         }
       },
       error: () => {
