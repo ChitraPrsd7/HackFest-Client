@@ -269,6 +269,105 @@
   &:disabled { opacity: 0.6; cursor: not-allowed; }
 }
 
+// ── OR Divider ──
+.esewa-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.esewa-divider-line {
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.esewa-divider-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+// ── 1ID Nepal Button ──
+.esewa-btn-oneid {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  background: rgba(220, 38, 38, 0.04);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(220, 38, 38, 0.05), rgba(239, 68, 68, 0.08));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  &:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.12);
+    transform: translateY(-1px);
+
+    &::before { opacity: 1; }
+
+    .oneid-arrow {
+      transform: translateX(4px);
+      color: #ef4444;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.oneid-label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+.oneid-main {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a2332;
+  line-height: 1.2;
+}
+
+.oneid-sub {
+  font-size: 9px;
+  font-weight: 500;
+  color: #6b7280;
+  line-height: 1.2;
+  margin-top: 1px;
+}
+
+.oneid-arrow {
+  color: #9ca3af;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 // Footer
 .esewa-form-footer {
   margin-top: 28px;

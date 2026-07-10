@@ -59,6 +59,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  loginWith1ID(): void {
+    const oneIdUrl = 'https://auth.1id.gov.np/oauth2/authorize';
+    window.location.href = oneIdUrl;
+  }
+
   goToRegister(): void {
     this.router.navigate(['/auth/register']);
   }
