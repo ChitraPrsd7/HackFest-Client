@@ -1,0 +1,63 @@
+// =====================================================
+// Daraz Global Styles & Design Tokens
+// Brand: Daraz — Nepal's Online Shopping Destination
+// Primary: #F57224 (Orange) | White Background
+// =====================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+// ── Design Tokens ─────────────────────────────────────
+:root {
+  --daraz-orange:        #F57224;
+  --daraz-orange-dark:   #d45e0f;
+  --daraz-orange-light:  #FF8C00;
+  --daraz-orange-pale:   #fff4ed;
+  --daraz-red:           #E50010;
+  --daraz-dark:          #1a1a2e;
+  --daraz-gray:          #6b7280;
+  --daraz-gray-light:    #f8f8f8;
+  --daraz-white:         #ffffff;
+  --daraz-border:        #e5e7eb;
+  --daraz-shadow:        0 4px 20px rgba(0,0,0,0.08);
+  --daraz-radius:        8px;
+  --font-primary:        'Inter', sans-serif;
+}
+
+// ── Reset ─────────────────────────────────────────────
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: var(--daraz-dark);
+  background: var(--daraz-gray-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: var(--font-primary); cursor: pointer; border: none; outline: none; }
+input, select, textarea { font-family: var(--font-primary); }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--daraz-gray-light); }
+::-webkit-scrollbar-thumb { background: var(--daraz-orange); border-radius: 3px; }
+
+// ── Utilities ──────────────────────────────────────────
+.text-orange { color: var(--daraz-orange); }
+.bg-orange   { background: var(--daraz-orange); }
+.fw-700      { font-weight: 700; }
+
+.daraz-spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: dspin 0.7s linear infinite;
+}
+@keyframes dspin { to { transform: rotate(360deg); } }

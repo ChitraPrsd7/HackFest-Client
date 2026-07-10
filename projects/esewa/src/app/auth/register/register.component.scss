@@ -1,0 +1,377 @@
+// eSewa Register — matches reference photo layout
+// Left: green branding | Right: white registration form
+
+.esewa-auth-wrap {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+// ── Left Panel ───────────────────────────────────────
+.esewa-left-panel {
+  width: 42%;
+  background: linear-gradient(160deg, #60BB46 0%, #4a9a35 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -60px;
+    width: 280px; height: 280px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+}
+
+.esewa-left-inner {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.esewa-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 48px;
+}
+
+.esewa-logo-icon {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.esewa-logo-text {
+  font-size: 26px;
+  font-weight: 700;
+  color: white;
+}
+
+.esewa-logo-tm {
+  font-size: 11px;
+  color: rgba(255,255,255,0.8);
+  vertical-align: super;
+}
+
+.esewa-tagline {
+  h2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.7;
+  }
+}
+
+.esewa-dots {
+  margin-top: 40px;
+  display: flex;
+  gap: 8px;
+
+  .dot {
+    width: 24px; height: 4px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.35);
+    &.active {
+      background: white;
+      width: 32px;
+    }
+  }
+}
+
+// ── Right Panel ─────────────────────────────────────
+.esewa-right-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 40px 40px;
+  overflow-y: auto;
+}
+
+.esewa-form-wrap {
+  width: 100%;
+  max-width: 440px;
+}
+
+.esewa-form-topbar {
+  margin-bottom: 24px;
+}
+
+.esewa-form-header {
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a2332;
+    margin-bottom: 4px;
+  }
+  p {
+    font-size: 13px;
+    color: #6b7280;
+  }
+}
+
+// Alerts
+.esewa-alert {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+
+  &.success {
+    background: #d1fae5;
+    border: 1px solid #6ee7b7;
+    color: #065f46;
+  }
+  &.error {
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+  }
+}
+
+// Fields
+.esewa-field {
+  margin-bottom: 16px;
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #1a2332;
+    background: #fff;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #60BB46;
+      box-shadow: 0 0 0 3px rgba(96,187,70,0.1);
+    }
+    &::placeholder { color: #c0c4cc; }
+  }
+
+  &.has-error input {
+    border-color: #ef4444;
+  }
+}
+
+.esewa-field-error {
+  display: block;
+  font-size: 12px;
+  color: #ef4444;
+  margin-top: 4px;
+}
+
+// Gender Buttons
+.esewa-gender-group {
+  display: flex;
+  gap: 10px;
+
+  .gender-btn {
+    flex: 1;
+    padding: 8px;
+    border: 1.5px solid #d1d5db;
+    border-radius: 6px;
+    background: #f9fafb;
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover { border-color: #60BB46; color: #60BB46; }
+    &.selected {
+      border-color: #60BB46;
+      background: rgba(96,187,70,0.08);
+      color: #4a9a35;
+      font-weight: 600;
+    }
+  }
+}
+
+// Promo Code
+.esewa-promo-toggle {
+  padding: 8px 20px;
+  border: 1.5px solid #60BB46;
+  border-radius: 6px;
+  background: transparent;
+  color: #60BB46;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(96,187,70,0.06);
+  }
+}
+
+.esewa-promo-input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 14px;
+  &:focus {
+    outline: none;
+    border-color: #60BB46;
+    box-shadow: 0 0 0 3px rgba(96,187,70,0.1);
+  }
+}
+
+// Terms
+.esewa-terms {
+  .esewa-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #374151;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      margin-top: 2px;
+      width: 15px;
+      height: 15px;
+      accent-color: #60BB46;
+      flex-shrink: 0;
+    }
+
+    .esewa-link {
+      color: #60BB46;
+      text-decoration: none;
+      font-weight: 500;
+      &:hover { text-decoration: underline; }
+    }
+  }
+}
+
+// reCAPTCHA
+.esewa-recaptcha {
+  margin-bottom: 20px;
+
+  .recaptcha-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 12px 16px;
+    background: #f9f9f9;
+
+    .recaptcha-check {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .recaptcha-text {
+      flex: 1;
+      font-size: 14px;
+      color: #374151;
+      cursor: pointer;
+    }
+
+    .recaptcha-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+
+      .recaptcha-label {
+        font-size: 9px;
+        font-weight: 700;
+        color: #4285f4;
+      }
+      .recaptcha-sub {
+        font-size: 8px;
+        color: #9ca3af;
+      }
+    }
+  }
+}
+
+// Create Button
+.esewa-btn-create {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #60BB46, #4a9a35);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.2s, transform 0.15s;
+  margin-bottom: 16px;
+
+  &:hover:not(:disabled) {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+// Already have token
+.esewa-already-token {
+  text-align: center;
+
+  button {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    &:hover { color: #60BB46; }
+  }
+}
+
+@media (max-width: 768px) {
+  .esewa-auth-wrap { flex-direction: column; }
+  .esewa-left-panel { width: 100%; padding: 32px 24px; }
+  .esewa-right-panel { padding: 28px 20px; }
+}

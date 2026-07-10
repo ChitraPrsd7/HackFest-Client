@@ -3,8 +3,15 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve ORCHID-HACKFEST --port 4201",
+    "start:default": "ng serve ORCHID-HACKFEST --port 4201",
+    "start:esewa": "ng serve esewa --port 4202",
+    "start:daraz": "ng serve daraz --port 4203",
+    "start:khalti": "ng serve khalti --port 4204",
     "build": "ng build",
+    "build:esewa": "ng build esewa",
+    "build:daraz": "ng build daraz",
+    "build:khalti": "ng build khalti",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

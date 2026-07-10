@@ -1,0 +1,629 @@
+// eSewa Dashboard — Matches reference screenshots
+// Dark navbar + green action bar + sidebar + cards + dark footer
+
+$green: #60BB46;
+$green-dark: #4a9a35;
+$dark-nav: #2d3748;
+$dark-footer: #2d3748;
+$white: #fff;
+$gray-light: #f5f5f5;
+$gray: #6b7280;
+$border: #e5e7eb;
+
+.esewa-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background: $gray-light;
+}
+
+// ── NAVBAR ───────────────────────────────────────────
+.esewa-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $dark-nav;
+  padding: 10px 24px;
+  height: 52px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.esewa-nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+
+  .nav-logo-circle {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: $green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  sup { font-size: 9px; color: rgba(255,255,255,0.7); }
+}
+
+.nav-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 6px 14px;
+  min-width: 340px;
+
+  svg { color: rgba(255,255,255,0.5); flex-shrink: 0; }
+
+  input {
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 13px;
+    width: 100%;
+    &::placeholder { color: rgba(255,255,255,0.4); }
+  }
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-icon-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: white;
+  padding: 4px;
+  border-radius: 50%;
+  &:hover { background: rgba(255,255,255,0.1); }
+}
+
+.nav-balance {
+  background: rgba(96,187,70,0.2);
+  border: 1px solid rgba(96,187,70,0.4);
+  border-radius: 20px;
+  padding: 5px 14px;
+  color: $green;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.nav-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: $green;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+// ── GREEN ACTION BAR ─────────────────────────────────
+.esewa-action-bar {
+  background: $green;
+  padding: 8px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.action-bar-inner {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 4px;
+  width: max-content;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 8px;
+  min-width: 72px;
+  transition: background 0.15s;
+
+  &:hover { background: rgba(255,255,255,0.15); }
+
+  .action-icon { font-size: 18px; }
+  .action-label { font-size: 11px; font-weight: 500; white-space: nowrap; }
+}
+
+// ── MAIN LAYOUT ──────────────────────────────────────
+.esewa-main {
+  display: flex;
+  flex: 1;
+  gap: 0;
+}
+
+// ── SIDEBAR ──────────────────────────────────────────
+.esewa-sidebar {
+  width: 200px;
+  min-width: 200px;
+  background: white;
+  border-right: 1px solid $border;
+
+  .sidebar-list {
+    list-style: none;
+    padding: 8px 0;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #374151;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+
+    &:hover {
+      background: var(--esewa-green-pale, #e8f7e3);
+      color: $green;
+      border-left-color: $green;
+    }
+    &.active {
+      background: var(--esewa-green-pale, #e8f7e3);
+      color: $green;
+      border-left-color: $green;
+      font-weight: 600;
+    }
+  }
+}
+
+// ── CONTENT ──────────────────────────────────────────
+.esewa-content {
+  flex: 1;
+  padding: 16px 20px;
+  overflow-y: auto;
+}
+
+// Banner
+.esewa-banner {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  height: 200px;
+
+  .banner-slides { height: 100%; }
+
+  .banner-slide {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 24px 32px;
+    transition: background 0.4s;
+  }
+
+  .banner-text {
+    color: white;
+    h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; line-height: 1.3; }
+    p  { font-size: 14px; opacity: 0.9; }
+  }
+
+  .banner-dots {
+    position: absolute;
+    bottom: 12px; right: 16px;
+    display: flex; gap: 6px;
+
+    .banner-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: background 0.2s;
+      &.active { background: white; width: 20px; border-radius: 4px; }
+    }
+  }
+
+  .banner-nav {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    &:hover { background: rgba(255,255,255,0.45); }
+
+    &.banner-prev { left: 12px; }
+    &.banner-next { right: 12px; }
+  }
+}
+
+// Sections
+.esewa-section {
+  margin-bottom: 28px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a2332;
+  }
+
+  .view-more-btn {
+    background: none;
+    border: 1px solid $green;
+    color: $green;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover { background: rgba(96,187,70,0.06); }
+  }
+}
+
+// Cards Row
+.esewa-cards-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  position: relative;
+}
+
+.service-card {
+  flex: 0 0 160px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid $border;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  }
+
+  .card-badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: #f3f4f6;
+    color: $gray;
+    margin-bottom: 10px;
+
+    &.discount { background: #fef3c7; color: #92400e; }
+  }
+
+  .card-logo {
+    width: 70px; height: 50px;
+    border-radius: 8px;
+    background: #f3f4f6;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.featured-logo { background: #e8f7e3; }
+    &.merchant-logo { }
+  }
+
+  .card-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a2332;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .card-detail-btn {
+    background: none;
+    border: none;
+    color: $green;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    &:hover { text-decoration: underline; }
+  }
+}
+
+.card-arrow {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  color: $green;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+// Transactions
+.esewa-transactions {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid $border;
+  overflow: hidden;
+}
+
+.txn-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background 0.15s;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: #fafafa; }
+}
+
+.txn-icon {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: #e8f7e3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.txn-info {
+  flex: 1;
+  .txn-name { display: block; font-size: 13px; font-weight: 600; color: #1a2332; }
+  .txn-date { display: block; font-size: 11px; color: $gray; margin-top: 2px; }
+}
+
+.txn-amount {
+  font-size: 14px;
+  font-weight: 700;
+  &.credit { color: $green; }
+  &.debit  { color: #ef4444; }
+}
+
+.txn-status {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+
+  &.success { background: #d1fae5; color: #065f46; }
+  &.pending { background: #fef3c7; color: #92400e; }
+  &.failed  { background: #fee2e2; color: #dc2626; }
+}
+
+// ── FOOTER ───────────────────────────────────────────
+.esewa-footer {
+  background: $dark-footer;
+  color: rgba(255,255,255,0.75);
+  padding: 40px 32px 0;
+  position: relative;
+}
+
+.footer-top {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 130px;
+
+  h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  ul {
+    list-style: none;
+    li {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 8px;
+      cursor: pointer;
+      &:hover { color: $green; }
+    }
+  }
+}
+
+.contact-col {
+  min-width: 200px;
+
+  .contact-details {
+    p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 4px;
+    }
+  }
+}
+
+.footer-esewa-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+
+  .footer-logo-circle {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: $green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .footer-brand {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    sup { font-size: 9px; }
+  }
+}
+
+.become-merchant-btn {
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: $green;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover { background: $green-dark; }
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  flex-wrap: wrap;
+}
+
+.footer-badges {
+  display: flex;
+  gap: 10px;
+
+  .badge-item {
+    padding: 8px 12px;
+    background: white;
+    border-radius: 6px;
+    font-size: 10px;
+    color: #1a2332;
+    font-weight: 600;
+    text-align: center;
+    min-width: 70px;
+
+    strong { display: block; }
+    &.visa { color: #1a1a8c; }
+    &.mc   { color: #e60000; }
+  }
+}
+
+.footer-app-dl {
+  text-align: center;
+
+  p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 10px;
+  }
+
+  .app-badges {
+    display: flex;
+    gap: 10px;
+  }
+
+  .app-badge {
+    display: flex;
+    flex-direction: column;
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    &:hover { border-color: $green; }
+
+    span { font-size: 10px; color: rgba(255,255,255,0.7); }
+    strong { font-size: 13px; color: white; }
+  }
+}
+
+.fi-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+
+.footer-copyright {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0 20px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+
+  .footer-social {
+    display: flex;
+    gap: 12px;
+    a {
+      color: rgba(255,255,255,0.55);
+      font-weight: 600;
+      &:hover { color: $green; }
+    }
+  }
+}
+
+// FABs
+.esewa-fab,
+.esewa-chat-fab {
+  position: fixed;
+  right: 16px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: $green;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  z-index: 999;
+  transition: transform 0.2s;
+  &:hover { transform: scale(1.1); }
+}
+
+.esewa-fab      { bottom: 72px; }
+.esewa-chat-fab { bottom: 20px; }

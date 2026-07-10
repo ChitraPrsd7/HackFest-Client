@@ -1,0 +1,155 @@
+<div class="esewa-auth-wrap">
+
+  <!-- LEFT PANEL — Green eSewa branding -->
+  <div class="esewa-left-panel">
+    <div class="esewa-left-inner">
+      <div class="esewa-logo">
+        <div class="esewa-logo-icon">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="20" fill="white"/>
+            <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle"
+                  font-family="Inter,sans-serif" font-size="13" font-weight="800" fill="#60BB46">e</text>
+          </svg>
+        </div>
+        <span class="esewa-logo-text">Sewa</span>
+        <sup class="esewa-logo-tm">®</sup>
+      </div>
+
+      <div class="esewa-tagline">
+        <h2>Simple &amp; Fast<br>Payment</h2>
+        <p>Way to recharge your mobile &amp;<br>make utility bill payments<br>instantly via eSewa.</p>
+      </div>
+
+      <div class="esewa-dots">
+        <span class="dot"></span>
+        <span class="dot active"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL — Registration Form (matches reference photo) -->
+  <div class="esewa-right-panel">
+    <div class="esewa-form-wrap">
+
+      <!-- Close button area -->
+      <div class="esewa-form-topbar">
+        <div class="esewa-form-header">
+          <h1>Registration</h1>
+          <p>Register and Get your Free Mobile Account Instantly!</p>
+        </div>
+      </div>
+
+      <!-- Success / Error -->
+      <div class="esewa-alert success" *ngIf="registerSuccess">✓ {{ registerSuccess }}</div>
+      <div class="esewa-alert error" *ngIf="registerError">⚠ {{ registerError }}</div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+
+        <!-- Full Name -->
+        <div class="esewa-field" [class.has-error]="fullName.invalid && fullName.touched">
+          <label for="fullName">Full Name</label>
+          <input id="fullName" type="text" formControlName="fullName" placeholder="Enter full name"/>
+          <span class="esewa-field-error" *ngIf="fullName.invalid && fullName.touched">Full name is required</span>
+        </div>
+
+        <!-- Email Address -->
+        <div class="esewa-field" [class.has-error]="email.invalid && email.touched">
+          <label for="regEmail">Email Address</label>
+          <input id="regEmail" type="email" formControlName="email" placeholder="eg.youremail@example.com"/>
+          <span class="esewa-field-error" *ngIf="email.invalid && email.touched">Valid email is required</span>
+        </div>
+
+        <!-- Mobile Number -->
+        <div class="esewa-field" [class.has-error]="mobileNumber.invalid && mobileNumber.touched">
+          <label for="regMobile">Mobile Number</label>
+          <input id="regMobile" type="tel" formControlName="mobileNumber" placeholder="98########"/>
+          <span class="esewa-field-error" *ngIf="mobileNumber.invalid && mobileNumber.touched">
+            Enter a valid Nepal mobile number (98/97/96)
+          </span>
+        </div>
+
+        <!-- Gender -->
+        <div class="esewa-field">
+          <label>Gender</label>
+          <div class="esewa-gender-group">
+            <button type="button"
+              class="gender-btn"
+              [class.selected]="selectedGender === 'Male'"
+              (click)="selectGender('Male')"
+              id="gender-male">Male</button>
+            <button type="button"
+              class="gender-btn"
+              [class.selected]="selectedGender === 'Female'"
+              (click)="selectGender('Female')"
+              id="gender-female">Female</button>
+            <button type="button"
+              class="gender-btn"
+              [class.selected]="selectedGender === 'Other'"
+              (click)="selectGender('Other')"
+              id="gender-other">Other</button>
+          </div>
+        </div>
+
+        <!-- Promo Code -->
+        <div class="esewa-field">
+          <button type="button" class="esewa-promo-toggle" (click)="togglePromo()" id="btn-promo">
+            Have Promocode ?
+          </button>
+          <input
+            *ngIf="showPromoInput"
+            type="text"
+            formControlName="promoCode"
+            placeholder="Enter promo code"
+            class="esewa-promo-input"
+          />
+        </div>
+
+        <!-- Terms & Conditions -->
+        <div class="esewa-field esewa-terms">
+          <label class="esewa-checkbox-label">
+            <input type="checkbox" formControlName="acceptedTerms" id="acceptedTerms"/>
+            <span>
+              I agree to the <a href="#" class="esewa-link">Terms &amp; Conditions</a> and
+              <a href="#" class="esewa-link">Privacy Policy</a> of eSewa.
+            </span>
+          </label>
+        </div>
+
+        <!-- reCAPTCHA placeholder -->
+        <div class="esewa-recaptcha">
+          <div class="recaptcha-box">
+            <input type="checkbox" class="recaptcha-check" id="captcha-check"/>
+            <label for="captcha-check" class="recaptcha-text">I'm not a robot</label>
+            <div class="recaptcha-logo">
+              <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="32" r="32" fill="#f9f9f9"/>
+                <path d="M32 12 L52 32 L32 52 L12 32 Z" fill="none" stroke="#4285f4" stroke-width="3"/>
+                <circle cx="32" cy="32" r="10" fill="#4285f4"/>
+              </svg>
+              <span class="recaptcha-label">reCAPTCHA</span>
+              <span class="recaptcha-sub">Privacy - Terms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Create Button -->
+        <button type="submit" class="esewa-btn-create" [disabled]="isLoading" id="btn-esewa-create">
+          <span class="esewa-spinner" *ngIf="isLoading"></span>
+          <span *ngIf="!isLoading">Create</span>
+          <span *ngIf="isLoading">Creating account...</span>
+        </button>
+
+      </form>
+
+      <!-- Already have token -->
+      <div class="esewa-already-token">
+        <button type="button" (click)="goToLogin()" id="btn-already-token">
+          ALREADY HAVE TOKEN?
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,89 @@
+// =====================================================
+// eSewa Global Styles & Design Tokens
+// Brand: eSewa Digital Wallet Nepal
+// Primary: #60BB46 (Green) | Secondary: #4a9a35
+// =====================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+// ── Design Tokens ────────────────────────────────────
+:root {
+  --esewa-green:        #60BB46;
+  --esewa-green-dark:   #4a9a35;
+  --esewa-green-light:  #7dd163;
+  --esewa-green-pale:   #e8f7e3;
+  --esewa-dark:         #2d3748;
+  --esewa-dark-nav:     #1a2332;
+  --esewa-gray:         #6b7280;
+  --esewa-gray-light:   #f3f4f6;
+  --esewa-white:        #ffffff;
+  --esewa-border:       #e5e7eb;
+  --esewa-shadow:       0 4px 20px rgba(0, 0, 0, 0.08);
+  --esewa-radius:       8px;
+  --esewa-radius-lg:    16px;
+  --font-primary:       'Inter', sans-serif;
+}
+
+// ── Reset ────────────────────────────────────────────
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: var(--esewa-dark);
+  background: var(--esewa-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: var(--font-primary);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+input, select, textarea {
+  font-family: var(--font-primary);
+}
+
+// ── Scrollbar ────────────────────────────────────────
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--esewa-gray-light);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--esewa-green);
+  border-radius: 3px;
+}
+
+// ── Utility Classes ──────────────────────────────────
+.text-green    { color: var(--esewa-green); }
+.text-gray     { color: var(--esewa-gray); }
+.bg-green      { background: var(--esewa-green); }
+.fw-600        { font-weight: 600; }
+.fw-700        { font-weight: 700; }
+.esewa-spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

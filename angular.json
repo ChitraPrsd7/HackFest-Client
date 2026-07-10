@@ -27,33 +27,18 @@
             "outputPath": "dist/orchid-hackfest",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "16kB",
-                  "maximumError": "32kB"
-                }
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "16kB", "maximumError": "32kB" }
               ],
               "outputHashing": "all"
             },
@@ -67,16 +52,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "port": 4201
-          },
+          "options": { "port": 4201 },
           "configurations": {
-            "production": {
-              "buildTarget": "ORCHID-HACKFEST:build:production"
-            },
-            "development": {
-              "buildTarget": "ORCHID-HACKFEST:build:development"
-            }
+            "production": { "buildTarget": "ORCHID-HACKFEST:build:production" },
+            "development": { "buildTarget": "ORCHID-HACKFEST:build:development" }
           },
           "defaultConfiguration": "development"
         },
@@ -86,23 +65,184 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": [{ "glob": "**/*", "input": "public" }],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
+        }
+      }
+    },
+
+    "esewa": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": { "style": "scss", "standalone": false },
+        "@schematics/angular:directive": { "standalone": false },
+        "@schematics/angular:pipe": { "standalone": false }
+      },
+      "root": "projects/esewa",
+      "sourceRoot": "projects/esewa/src",
+      "prefix": "esewa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/esewa",
+            "index": "projects/esewa/src/index.html",
+            "browser": "projects/esewa/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/esewa/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              { "glob": "**/*", "input": "projects/esewa/src/assets", "output": "assets" }
+            ],
+            "styles": ["projects/esewa/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "16kB", "maximumError": "32kB" }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": { "port": 4202 },
+          "configurations": {
+            "production": { "buildTarget": "esewa:build:production" },
+            "development": { "buildTarget": "esewa:build:development" }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        }
+      }
+    },
+
+    "daraz": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": { "style": "scss", "standalone": false },
+        "@schematics/angular:directive": { "standalone": false },
+        "@schematics/angular:pipe": { "standalone": false }
+      },
+      "root": "projects/daraz",
+      "sourceRoot": "projects/daraz/src",
+      "prefix": "daraz",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/daraz",
+            "index": "projects/daraz/src/index.html",
+            "browser": "projects/daraz/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/daraz/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              { "glob": "**/*", "input": "projects/daraz/src/assets", "output": "assets" }
+            ],
+            "styles": ["projects/daraz/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "16kB", "maximumError": "32kB" }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": { "port": 4203 },
+          "configurations": {
+            "production": { "buildTarget": "daraz:build:production" },
+            "development": { "buildTarget": "daraz:build:development" }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        }
+      }
+    },
+
+    "khalti": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": { "style": "scss", "standalone": false },
+        "@schematics/angular:directive": { "standalone": false },
+        "@schematics/angular:pipe": { "standalone": false }
+      },
+      "root": "projects/khalti",
+      "sourceRoot": "projects/khalti/src",
+      "prefix": "khalti",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/khalti",
+            "index": "projects/khalti/src/index.html",
+            "browser": "projects/khalti/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/khalti/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              { "glob": "**/*", "input": "projects/khalti/src/assets", "output": "assets" }
+            ],
+            "styles": ["projects/khalti/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "16kB", "maximumError": "32kB" }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": { "port": 4204 },
+          "configurations": {
+            "production": { "buildTarget": "khalti:build:production" },
+            "development": { "buildTarget": "khalti:build:development" }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
         }
       }
     }
