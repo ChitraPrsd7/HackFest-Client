@@ -10,12 +10,7 @@
   <!-- Top bar with clean layout (No language switcher) -->
   <header class="gov-topbar">
     <div class="gov-logo-area">
-      <!-- Accurate Double-Triangle Flag of Nepal SVG -->
-      <svg class="gov-flag" width="26" height="32" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 2L22 14.5H12L22 28.5H2Z" fill="#E11D48" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M6 8A2.5 2.5 0 0 0 11 8A2.5 2.5 0 0 1 6 8" fill="#FFFFFF"/>
-        <circle cx="8" cy="20" r="2.5" fill="#FFFFFF"/>
-      </svg>
+      <img src="assets/logo.png" alt="Nepal Government Logo" class="gov-flag" width="28" height="28" style="object-fit: contain;">
       <div class="gov-txt">
         <span class="gov-org-ne">नेपाल सरकार</span>
         <span class="gov-org-ministry">सञ्चार तथा सूचना प्रविधि मन्त्रालय</span>
@@ -36,16 +31,11 @@
       <div class="gov-card-header">
         <div class="gov-emblem-wrap">
           <div class="emblem-hex">
-            <!-- Accurate Emblem Representation inside Card Hex -->
-            <svg width="40" height="40" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 2L22 14.5H12L22 28.5H2Z" fill="#E11D48" stroke="#2563EB" stroke-width="1.8" stroke-linejoin="round"/>
-              <path d="M6 8A2.5 2.5 0 0 0 11 8A2.5 2.5 0 0 1 6 8" fill="#FFFFFF"/>
-              <circle cx="8" cy="20" r="2.5" fill="#FFFFFF"/>
-            </svg>
+            <img src="assets/logo.png" alt="Emblem" width="40" height="40" style="object-fit: contain;">
           </div>
         </div>
         <h1 class="portal-title">नागरिक एप प्रणाली</h1>
-        <h2 class="portal-subtitle">Administrative Console</h2>
+        <h2 class="portal-subtitle">नागरिक पोर्टल (Citizen Portal)</h2>
       </div>
 
       <!-- Compact error message -->
@@ -60,20 +50,20 @@
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="gov-form" novalidate>
         
-        <!-- Email Input (No placeholder) -->
-        <div class="gov-field-group" [class.field-error]="email.invalid && email.touched">
-          <label class="gov-label" for="email">कार्यालय ईमेल (Official Email)</label>
+        <!-- Phone or Citizen ID Input -->
+        <div class="gov-field-group" [class.field-error]="phoneOrId.invalid && phoneOrId.touched">
+          <label class="gov-label" for="phoneOrId">मोबाइल नम्बर वा नागरिकता नम्बर (Phone Number / Citizen ID)</label>
           <div class="gov-input-container">
             <input
-              id="email"
-              type="email"
+              id="phoneOrId"
+              type="text"
               class="gov-input"
-              formControlName="email"
-              autocomplete="email"
+              formControlName="phoneOrId"
+              placeholder="Example: 98XXXXXXXX or 27-01-72-XXXXX"
             />
             <span class="input-glow-border"></span>
           </div>
-          <p class="gov-error-text" *ngIf="email.invalid && email.touched">Enter a valid official email address</p>
+          <p class="gov-error-text" *ngIf="phoneOrId.invalid && phoneOrId.touched">Phone number or Citizen ID is required</p>
         </div>
 
         <!-- Password Input (No placeholder) -->
@@ -117,8 +107,8 @@
       </form>
 
       <div class="gov-card-footer">
-        <span>Need administrative access?</span>
-        <button type="button" class="gov-link-btn" (click)="goToRegister()">Register Office Account</button>
+        <span>Don't have a citizen account?</span>
+        <button type="button" class="gov-link-btn" (click)="goToRegister()">Register Citizen Account</button>
       </div>
 
     </div>

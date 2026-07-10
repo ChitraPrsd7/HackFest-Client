@@ -1,16 +1,28 @@
 /* ============================================================
-   NEPAL GOVERNMENT & NAGARIK PORTAL - PREMIUM REGISTER UI
+   NEPAL GOVERNMENT & NAGARIK PORTAL - HACKATHON-GRADE UI
    ============================================================ */
 
 .gov-auth-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #0b0f19;
+  /* Premium official gradient combining Nepalese flag blue and deep dark slate */
+  background: radial-gradient(circle at top left, #1e3a8a 0%, #0b0f19 60%, #580c1f 120%);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #f1f5f9;
   position: relative;
   overflow: hidden;
+
+  /* Fine Dot Matrix Grid Overlay - Professional SaaS feel */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+    z-index: 1;
+  }
 }
 
 /* ─── Immersive Background Shapes ─── */
@@ -24,35 +36,27 @@
   .shape {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.25;
+    filter: blur(100px);
+    opacity: 0.15;
+    mix-blend-mode: screen;
   }
 
   .shape-1 {
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, #2563eb 0%, transparent 80%);
-    top: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #3b82f6 0%, transparent 80%);
+    top: -150px;
     left: -100px;
     animation: shape-float 20s infinite alternate;
   }
 
   .shape-2 {
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, #e11d48 0%, transparent 80%);
-    bottom: -80px;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, #f43f5e 0%, transparent 80%);
+    bottom: -100px;
     right: -80px;
     animation: shape-float 15s infinite alternate-reverse;
-  }
-
-  .shape-3 {
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, #06b6d4 0%, transparent 80%);
-    top: 40%;
-    right: 15%;
-    animation: shape-float 18s infinite alternate;
   }
 }
 
@@ -64,10 +68,10 @@
 /* ─── Glassmorphism Header ─── */
 .gov-topbar {
   height: 64px;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -94,7 +98,7 @@
 .gov-org-ne {
   font-size: 13px;
   font-weight: 800;
-  color: #e11d48;
+  color: #f43f5e;
   line-height: 1.2;
 }
 
@@ -109,47 +113,17 @@
 .gov-topbar-actions {
   display: flex;
   align-items: center;
-  gap: 20px;
 }
 
 .support-info {
   font-size: 11px;
-  color: #94a3b8;
+  color: #64748b;
   font-weight: 600;
+  letter-spacing: 0.5px;
   
   .support-phone {
     color: #38bdf8;
-  }
-}
-
-.action-divider {
-  width: 1px;
-  height: 16px;
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-.lang-switcher {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #64748b;
-
-  .lang-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: #94a3b8;
-    font-weight: 500;
-    transition: color 0.2s;
-
-    &:hover { color: #38bdf8; }
-    &.active { color: #38bdf8; font-weight: 700; }
-  }
-
-  .lang-sep {
-    opacity: 0.3;
+    margin-left: 4px;
   }
 }
 
@@ -166,22 +140,22 @@
 
 .gov-auth-card {
   width: 100%;
-  max-width: 580px; /* Slightly wider card to comfortably fit 2-column layout */
-  background: rgba(30, 41, 59, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 12px;
+  max-width: 580px; /* Wider card to comfortably fit 2-column layout */
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   padding: 36px 40px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  animation: card-appear 0.4s ease-out;
+  animation: card-appear 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes card-appear {
-  from { opacity: 0; transform: translateY(15px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -193,14 +167,14 @@
 }
 
 .emblem-hex {
-  width: 60px;
-  height: 60px;
-  background: rgba(37, 99, 235, 0.05);
-  border-radius: 12px;
+  width: 56px;
+  height: 56px;
+  background: rgba(59, 130, 246, 0.08);
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.2);
   margin-bottom: 12px;
 }
 
@@ -215,10 +189,9 @@
 .portal-subtitle {
   font-size: 11px;
   font-weight: 700;
-  color: #cbd5e1;
+  color: #94a3b8;
   text-transform: uppercase;
   letter-spacing: 1px;
-  opacity: 0.8;
 }
 
 /* Form Layout (2-Column Grid) */
@@ -265,13 +238,9 @@
   outline: none;
   transition: all 0.25s;
 
-  &::placeholder {
-    color: #475569;
-  }
-
   &:focus {
-    border-color: #38bdf8;
-    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
     background: rgba(15, 23, 42, 0.85);
   }
 }
@@ -305,7 +274,7 @@
   
   option {
     color: #ffffff;
-    background-color: #1e293b;
+    background-color: #0f172a;
   }
 }
 
@@ -317,15 +286,15 @@
   cursor: pointer;
   font-size: 11px;
   font-weight: 600;
-  color: #38bdf8;
+  color: #3b82f6;
 
   &:hover {
-    color: #7dd3fc;
+    color: #60a5fa;
   }
 }
 
 .gov-error-text {
-  font-size: 10.5px;
+  font-size: 10px;
   color: #f43f5e;
   font-weight: 500;
   margin-top: 1px;
@@ -338,19 +307,19 @@
   gap: 8px;
   padding: 8px 12px;
   border-radius: 6px;
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 500;
   
   &.alert-error {
     background-color: rgba(244, 63, 94, 0.1);
-    border: 1px solid rgba(244, 63, 94, 0.25);
-    color: #fb7185;
+    border: 1px solid rgba(244, 63, 94, 0.2);
+    color: #fda4af;
   }
 
   &.alert-success {
     background-color: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.25);
-    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: #86efac;
   }
 }
 
@@ -412,14 +381,14 @@
 .gov-link-btn {
   background: transparent;
   border: none;
-  color: #38bdf8;
+  color: #3b82f6;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
   padding: 0;
 
   &:hover {
-    color: #7dd3fc;
+    color: #60a5fa;
     text-decoration: underline;
   }
 }
@@ -429,7 +398,7 @@
   margin-top: 16px;
   max-width: 500px;
   background: rgba(15, 23, 42, 0.3);
-  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border: 1px dashed rgba(255, 255, 255, 0.06);
   padding: 8px 12px;
   border-radius: 6px;
   display: flex;
@@ -465,7 +434,7 @@
   }
   
   .sep { opacity: 0.3; }
-  a:hover { color: #38bdf8; }
+  a:hover { color: #3b82f6; }
 }
 
 @media (max-width: 640px) {

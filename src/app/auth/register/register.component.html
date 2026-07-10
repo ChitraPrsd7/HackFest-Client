@@ -10,12 +10,7 @@
   <!-- Top bar with clean layout (No language switcher) -->
   <header class="gov-topbar">
     <div class="gov-logo-area">
-      <!-- Accurate Double-Triangle Flag of Nepal SVG -->
-      <svg class="gov-flag" width="26" height="32" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 2L22 14.5H12L22 28.5H2Z" fill="#E11D48" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M6 8A2.5 2.5 0 0 0 11 8A2.5 2.5 0 0 1 6 8" fill="#FFFFFF"/>
-        <circle cx="8" cy="20" r="2.5" fill="#FFFFFF"/>
-      </svg>
+      <img src="assets/logo.png" alt="Nepal Government Logo" class="gov-flag" width="28" height="28" style="object-fit: contain;">
       <div class="gov-txt">
         <span class="gov-org-ne">नेपाल सरकार</span>
         <span class="gov-org-ministry">सञ्चार तथा सूचना प्रविधि मन्त्रालय</span>
@@ -36,15 +31,11 @@
       <div class="gov-card-header">
         <div class="gov-emblem-wrap">
           <div class="emblem-hex">
-            <svg width="40" height="40" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 2L22 14.5H12L22 28.5H2Z" fill="#E11D48" stroke="#2563EB" stroke-width="1.8" stroke-linejoin="round"/>
-              <path d="M6 8A2.5 2.5 0 0 0 11 8A2.5 2.5 0 0 1 6 8" fill="#FFFFFF"/>
-              <circle cx="8" cy="20" r="2.5" fill="#FFFFFF"/>
-            </svg>
+            <img src="assets/logo.png" alt="Emblem" width="40" height="40" style="object-fit: contain;">
           </div>
         </div>
-        <h1 class="portal-title">कार्यालय युजर दर्ता</h1>
-        <h2 class="portal-subtitle">Register Admin Account</h2>
+        <h1 class="portal-title">नयाँ नागरिक दर्ता</h1>
+        <h2 class="portal-subtitle">Register Citizen Account</h2>
       </div>
 
       <!-- Success / Error Alerts -->
@@ -68,7 +59,7 @@
       <!-- Register Form (Side-by-Side 2/2 grid fields - No placeholders) -->
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="gov-form" novalidate *ngIf="!successMessage">
         
-        <!-- Row 1: Full Name & Email -->
+        <!-- Row 1: Full Name & Citizenship Number -->
         <div class="gov-form-row">
           <div class="gov-field-group" [class.field-error]="fullName.invalid && fullName.touched">
             <label class="gov-label" for="fullName">पुरा नाम (Full Name)</label>
@@ -76,35 +67,31 @@
               <input id="fullName" type="text" class="gov-input" formControlName="fullName" autocomplete="name" />
               <span class="input-glow-border"></span>
             </div>
+            <p class="gov-error-text" *ngIf="fullName.invalid && fullName.touched">Full name is required (min 3 chars)</p>
           </div>
 
-          <div class="gov-field-group" [class.field-error]="email.invalid && email.touched">
-            <label class="gov-label" for="email">कार्यालय ईमेल (Official Email)</label>
+          <div class="gov-field-group" [class.field-error]="citizenshipNumber.invalid && citizenshipNumber.touched">
+            <label class="gov-label" for="citizenshipNumber">नागरिकता नम्बर (Citizenship Number)</label>
             <div class="gov-input-container">
-              <input id="email" type="email" class="gov-input" formControlName="email" autocomplete="email" />
+              <input id="citizenshipNumber" type="text" class="gov-input" formControlName="citizenshipNumber" placeholder="Example: 27-01-72-XXXXX" />
               <span class="input-glow-border"></span>
             </div>
+            <p class="gov-error-text" *ngIf="citizenshipNumber.invalid && citizenshipNumber.touched">Citizenship number is required</p>
           </div>
         </div>
 
-        <!-- Row 2: Designation & Access Code -->
+        <!-- Row 2: Phone Number -->
         <div class="gov-form-row">
-          <div class="gov-field-group" [class.field-error]="role.invalid && role.touched">
-            <label class="gov-label" for="role">पद / कार्यालय (Office / Role)</label>
-            <div class="gov-input-container select-container">
-              <select id="role" class="gov-input gov-select" formControlName="role">
-                <option *ngFor="let r of roles" [value]="r.value" [disabled]="r.value === ''">{{ r.label }}</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="gov-field-group" [class.field-error]="accessCode.invalid && accessCode.touched">
-            <label class="gov-label" for="accessCode">कार्यालय कोड (Access Code)</label>
+          <div class="gov-field-group" [class.field-error]="phoneNumber.invalid && phoneNumber.touched">
+            <label class="gov-label" for="phoneNumber">मोबाइल नम्बर (Phone Number)</label>
             <div class="gov-input-container">
-              <input id="accessCode" type="text" class="gov-input input-mono" formControlName="accessCode" autocomplete="off" />
+              <input id="phoneNumber" type="tel" class="gov-input" formControlName="phoneNumber" placeholder="Example: 98XXXXXXXX" />
               <span class="input-glow-border"></span>
             </div>
+            <p class="gov-error-text" *ngIf="phoneNumber.invalid && phoneNumber.touched">Enter a valid 10-digit mobile number</p>
           </div>
+          
+          <div class="gov-field-group empty-group"></div>
         </div>
 
         <!-- Row 3: Password & Confirm Password -->
@@ -118,10 +105,11 @@
                 {{ showPassword ? 'Hide' : 'Show' }}
               </button>
             </div>
+            <p class="gov-error-text" *ngIf="password.invalid && password.touched">Password must be at least 8 characters</p>
           </div>
 
           <div class="gov-field-group" [class.field-error]="(confirmPassword.invalid && confirmPassword.touched) || passwordMismatch">
-            <label class="gov-label" for="confirmPassword">पुष्टि गर्नुहोस् (Confirm)</label>
+            <label class="gov-label" for="confirmPassword">पासवर्ड पुष्टि गर्नुहोस् (Confirm Password)</label>
             <div class="gov-input-container">
               <input id="confirmPassword" [type]="showConfirm ? 'text' : 'password'" class="gov-input" formControlName="confirmPassword" autocomplete="new-password" />
               <span class="input-glow-border"></span>
@@ -129,6 +117,7 @@
                 {{ showConfirm ? 'Hide' : 'Show' }}
               </button>
             </div>
+            <p class="gov-error-text" *ngIf="confirmPassword.touched && passwordMismatch">Passwords do not match</p>
           </div>
         </div>
 

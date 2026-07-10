@@ -3,18 +3,17 @@ import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 export interface LoginPayload {
-  email: string;
+  phoneOrId: string;
   password: string;
   remember: boolean;
 }
 
 export interface RegisterPayload {
   fullName: string;
-  email: string;
-  role: string;
+  citizenshipNumber: string;
+  phoneNumber: string;
   password: string;
   confirmPassword: string;
-  accessCode: string;
 }
 
 @Injectable({

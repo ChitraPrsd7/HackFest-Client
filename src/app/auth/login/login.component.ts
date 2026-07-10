@@ -24,13 +24,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      phoneOrId: ['', [Validators.required, Validators.minLength(4)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       remember: [false]
     });
   }
 
-  get email() { return this.loginForm.get('email')!; }
+  get phoneOrId() { return this.loginForm.get('phoneOrId')!; }
   get password() { return this.loginForm.get('password')!; }
 
   togglePassword(): void {
@@ -44,9 +44,9 @@ export class LoginComponent implements OnInit {
     }
     this.isLoading = true;
     this.loginError = '';
-    const { email, password, remember } = this.loginForm.value;
+    const { phoneOrId, password, remember } = this.loginForm.value;
 
-    this.authService.login({ email, password, remember }).subscribe({
+    this.authService.login({ phoneOrId, password, remember }).subscribe({
       next: (res) => {
         this.isLoading = false;
         if (res.success) {

@@ -26,15 +26,6 @@ export class RegisterComponent implements OnInit {
   successMessage = '';
   errorMessage = '';
 
-  roles = [
-    { value: '', label: 'Select role / department' },
-    { value: 'admin', label: 'System Administrator' },
-    { value: 'moderator', label: 'Content Moderator' },
-    { value: 'analyst', label: 'Data Analyst' },
-    { value: 'support', label: 'Support Staff' },
-    { value: 'developer', label: 'Developer' },
-  ];
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -44,18 +35,16 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      role: ['', Validators.required],
-      accessCode: ['', [Validators.required, Validators.minLength(6)]],
+      citizenshipNumber: ['', [Validators.required, Validators.minLength(5)]],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^(98|97|96)\d{8}$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
     }, { validators: passwordMatchValidator });
   }
 
   get fullName() { return this.registerForm.get('fullName')!; }
-  get email() { return this.registerForm.get('email')!; }
-  get role() { return this.registerForm.get('role')!; }
-  get accessCode() { return this.registerForm.get('accessCode')!; }
+  get citizenshipNumber() { return this.registerForm.get('citizenshipNumber')!; }
+  get phoneNumber() { return this.registerForm.get('phoneNumber')!; }
   get password() { return this.registerForm.get('password')!; }
   get confirmPassword() { return this.registerForm.get('confirmPassword')!; }
   get passwordMismatch() {
@@ -69,18 +58,19 @@ export class RegisterComponent implements OnInit {
     }
     this.isLoading = true;
     this.errorMessage = '';
-    const { fullName, email, role, password, confirmPassword, accessCode } = this.registerForm.value;
+    this.successMessage = '';
+    const { fullName, citizenshipNumber, phoneNumber, password, confirmPassword } = this.registerForm.value;
 
-    this.authService.register({ fullName, email, role, password, confirmPassword, accessCode }).subscribe({
+    this.authService.register({ fullName, citizenshipNumber, phoneNumber, password, confirmPassword }).subscribe({
       next: (res) => {
         this.isLoading = false;
         if (res.success) {
-          this.successMessage = 'Access request submitted. You will be notified by email.';
+          this.successMessage = 'Registration successful! You can now log in.';
         }
       },
       error: () => {
         this.isLoading = false;
-        this.errorMessage = 'Registration failed. Please check your access code.';
+        this.errorMessage = 'Registration failed. Please check your inputs.';
       }
     });
   }
