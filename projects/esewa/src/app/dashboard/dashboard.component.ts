@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@shared/core/services/auth.service';
+import { OneIdService } from '@shared/core/services/one-id.service';
+
 
 interface Transaction {
   id: string;
@@ -30,6 +33,17 @@ export class DashboardComponent implements OnInit {
   userInitials = 'AS';
   searchQuery = '';
   selectedCategory = 'all';
+  isProfileDropdownOpen = false;
+
+  // ── Document modal state ──────────────────────────
+  isDocumentModalOpen = false;
+  isLoadingDocument = false;
+  documentData: any
+  documentError: string | null = null;
+
+  toggleProfileDropdown(): void {
+    this.isProfileDropdownOpen = !this.isProfileDropdownOpen;
+  }
 
   sidebarCategories = [
     { label: 'Topup & Recharge', hasArrow: true },
@@ -98,14 +112,64 @@ export class DashboardComponent implements OnInit {
     { id: 'T005', name: 'Fund Loaded - Bank', type: 'Load', amount: 5000, date: '2026-07-06', status: 'success', icon: '🏦' }
   ];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private oneIdService: OneIdService,
+    
+  ) {}
 
   ngOnInit(): void {}
 
   logout(): void {
-    localStorage.removeItem('brand_auth_token');
-    this.router.navigate(['/auth/login']);
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/auth/login']);
+      },
+      error: (err) => {
+        console.error('Logout error:', err);
+        this.router.navigate(['/auth/login']);
+      }
+    });
   }
 
-  setSlide(i: number): void { this.activeSlide = i; }
+  setSlide(i: number): void {
+    this.activeSlide = i;
+  }
+
+  // ── View Document flow ─────────────────────────────
+  viewDocument(): void {
+    this.isProfileDropdownOpen = false;
+    this.isDocumentModalOpen = true;
+    this.documentData = null;
+    this.documentError = null;
+
+    if (!this.oneIdService.isLoggedInWith1ID()) {
+      this.documentError = 'You need to sign in with 1ID to view this document.';
+      return;
+    }
+
+    this.isLoadingDocument = true;
+
+    this.oneIdService.getUserData().subscribe({
+      next: (data) => {
+        this.documentData = data;
+        this.isLoadingDocument = false;
+      },
+      error: (err) => {
+        console.error('Failed to fetch document data:', err);
+        this.documentError =
+          err.status === 401 || err.status === 403
+            ? 'Your session has expired. Please sign in again.'
+            : 'Could not load your document. Please try again.';
+        this.isLoadingDocument = false;
+      }
+    });
+  }
+
+  closeDocumentModal(): void {
+    this.isDocumentModalOpen = false;
+    this.documentData = null;
+    this.documentError = null;
+  }
 }

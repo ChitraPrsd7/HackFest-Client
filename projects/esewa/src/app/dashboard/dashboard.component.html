@@ -16,16 +16,41 @@
     </div>
 
     <div class="nav-right">
-      <button class="nav-icon-btn" title="Gift offers">
-        🎁
-      </button>
-      <button class="nav-icon-btn" title="Notifications">
-        🔔
-      </button>
+      <button class="nav-icon-btn" title="Gift offers">🎁</button>
+      <button class="nav-icon-btn" title="Notifications">🔔</button>
       <div class="nav-balance">
         <span>NPR {{ walletBalance | number:'1.2-2' }}</span>
       </div>
-      <div class="nav-avatar" id="esewa-user-avatar">{{ userInitials }}</div>
+      <div class="nav-avatar-container">
+        <div class="nav-avatar" id="esewa-user-avatar" (click)="toggleProfileDropdown()">{{ userInitials }}</div>
+
+        <!-- Profile Dropdown -->
+        <div class="profile-dropdown" *ngIf="isProfileDropdownOpen">
+          <div class="dropdown-user-info">
+            <span class="dropdown-user-name">{{ userName }}</span>
+            <span class="dropdown-user-status">Verified Account</span>
+          </div>
+
+          <button class="dropdown-view-doc-btn" (click)="viewDocument()" id="esewa-btn-view-document">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span>View Document</span>
+          </button>
+
+          <button class="dropdown-logout-btn" (click)="logout()" id="esewa-btn-logout">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Sign Out</span>
+          </button>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -62,8 +87,7 @@
       <!-- Banner Carousel -->
       <div class="esewa-banner">
         <div class="banner-slides">
-          <div class="banner-slide"
-               [style.background]="bannerSlides[activeSlide].bg">
+          <div class="banner-slide" [style.background]="bannerSlides[activeSlide].bg">
             <div class="banner-text">
               <h2>{{ bannerSlides[activeSlide].title }}</h2>
               <p>{{ bannerSlides[activeSlide].subtitle }}</p>
@@ -285,5 +309,28 @@
     <!-- Chat FAB -->
     <div class="esewa-chat-fab">💬</div>
   </footer>
+
+  <!-- ══ DOCUMENT MODAL ══════════════════════════════════════ -->
+  <div class="doc-modal-overlay" *ngIf="isDocumentModalOpen" (click)="closeDocumentModal()">
+    <div class="doc-modal" (click)="$event.stopPropagation()">
+      <div class="doc-modal-header">
+        <h3>My Document</h3>
+        <button class="doc-modal-close" (click)="closeDocumentModal()" id="esewa-btn-close-document">✕</button>
+      </div>
+
+      <div class="doc-modal-body">
+        <div class="doc-loading" *ngIf="isLoadingDocument">
+          <div class="doc-spinner"></div>
+          <span>Loading your document...</span>
+        </div>
+
+        <div class="doc-error" *ngIf="documentError">
+          {{ documentError }}
+        </div>
+
+        <pre class="doc-json" *ngIf="documentData && !isLoadingDocument">{{ documentData | json }}</pre>
+      </div>
+    </div>
+  </div>
 
 </div>

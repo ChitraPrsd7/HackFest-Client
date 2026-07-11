@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@shared/core/services/auth.service';
 
 interface DriverProfile {
   fullName: string;
@@ -73,7 +74,7 @@ export class DashboardComponent implements OnInit {
     { title: 'Weekly payout complete', time: '2 days ago', desc: 'Rs. 14,800.00 has been transferred to your connected bank account.' }
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {}
 
@@ -136,7 +137,14 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(): void {
-    localStorage.removeItem('brand_auth_token');
-    this.router.navigate(['/auth/login']);
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/auth/login']);
+      },
+      error: (err) => {
+        console.error('Logout error:', err);
+        this.router.navigate(['/auth/login']);
+      }
+    });
   }
 }

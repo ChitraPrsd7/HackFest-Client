@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 interface AppliedService {
   id: string;
@@ -63,7 +64,7 @@ export class DashboardComponent implements OnInit {
     { name: 'Property_Tax_Receipt_2082.pdf', type: 'PDF Document', size: '420 KB', issuedDate: '2026-07-01' }
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {}
 
@@ -72,6 +73,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logout() {
+    this.authService.logout();
     this.router.navigate(['/auth/login']);
   }
 }

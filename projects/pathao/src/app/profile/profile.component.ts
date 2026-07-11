@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '@shared/core/services/auth.service';
 
 interface DriverDocument {
   name: string;
@@ -76,7 +77,11 @@ export class ProfileComponent implements OnInit {
     { month: 'Jul', trips: 142, earnings: 22700 }
   ];
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.buildEditForm();
@@ -132,8 +137,15 @@ export class ProfileComponent implements OnInit {
   }
 
   logout(): void {
-    localStorage.removeItem('brand_auth_token');
-    this.router.navigate(['/auth/login']);
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/auth/login']);
+      },
+      error: (err) => {
+        console.error('Logout error:', err);
+        this.router.navigate(['/auth/login']);
+      }
+    });
   }
 
   getMaxEarnings(): number {
@@ -141,6 +153,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getBarHeight(earnings: number): number {
-    return Math.round((earnings / this.getMaxEarnings()) * 100);
+    const max = this.getMaxEarnings();
+    return max ? (earnings / max) * 100 : 0;
   }
 }

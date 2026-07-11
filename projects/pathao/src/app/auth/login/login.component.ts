@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@shared/core/services/auth.service';
+import { OneIdService } from '@shared/core/services/one-id.service';
 import { AuthResponse } from '@shared/models/user.model';
 
 @Component({
@@ -16,10 +17,15 @@ export class LoginComponent implements OnInit {
   showPassword = false;
   loginError = '';
 
+  /** Must match what is registered on the backend for client 'pathao-app' */
+  private readonly oneIdClientId    = 'pathao-app';
+  private readonly oneIdRedirectUri = 'http://localhost:4203/callback';
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private oneIdService: OneIdService
   ) {}
 
   ngOnInit(): void {
@@ -64,9 +70,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**
+   * Initiates 1ID Nepal PKCE OAuth2 flow.
+   * Generates code_verifier + code_challenge, then redirects the browser
+   * to the 1ID authorization endpoint. The IdP will redirect back to
+   * http://localhost:4201/callback with ?code=... which CallbackComponent handles.
+   */
   loginWith1ID(): void {
-    const oneIdUrl = 'https://auth.1id.gov.np/oauth2/authorize';
-    window.location.href = oneIdUrl;
+    this.oneIdService.initiateLogin(this.oneIdClientId, this.oneIdRedirectUri);
   }
 
   goToRegister(): void {

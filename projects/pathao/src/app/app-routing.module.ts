@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@shared/core/guards/auth.guard';
+import { CallbackComponent } from './auth/callback/callback.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
@@ -18,6 +19,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
   },
+  // 1ID Nepal OAuth2 callback — must match redirectUri: http://localhost:4201/callback
+  { path: 'callback', component: CallbackComponent },
   { path: '**', redirectTo: 'auth' }
 ];
 

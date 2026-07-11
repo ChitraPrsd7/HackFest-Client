@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 import { LoginPayload, RegisterPayload, AuthResponse } from '../../models/user.model';
+import { OneIdService } from './one-id.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ export class AuthService {
 
   private readonly TOKEN_KEY = 'brand_auth_token';
   private readonly USER_KEY = 'brand_auth_user';
+
+  constructor(private oneIdService: OneIdService) {}
 
   // ── Login ──────────────────────────────────────────────────
   login(payload: LoginPayload): Observable<AuthResponse> {
@@ -50,14 +53,19 @@ export class AuthService {
   }
 
   // ── Logout ─────────────────────────────────────────────────
-  logout(): void {
+  logout(): Observable<any> {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
+    if (this.oneIdService.isLoggedInWith1ID()) {
+      return this.oneIdService.logout();
+    }
+    this.oneIdService.clearTokens();
+    return of({ success: true, message: 'Logged out successfully' });
   }
 
   // ── Guards / Token Helpers ─────────────────────────────────
   isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.TOKEN_KEY);
+    return !!localStorage.getItem(this.TOKEN_KEY) || this.oneIdService.isLoggedInWith1ID();
   }
 
   getToken(): string | null {
@@ -69,3 +77,4 @@ export class AuthService {
     return raw ? JSON.parse(raw) : null;
   }
 }
+
