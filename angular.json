@@ -133,30 +133,30 @@
       }
     },
 
-    "daraz": {
+    "pathao": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": { "style": "scss", "standalone": false },
         "@schematics/angular:directive": { "standalone": false },
         "@schematics/angular:pipe": { "standalone": false }
       },
-      "root": "projects/daraz",
-      "sourceRoot": "projects/daraz/src",
-      "prefix": "daraz",
+      "root": "projects/pathao",
+      "sourceRoot": "projects/pathao/src",
+      "prefix": "pathao",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/daraz",
-            "index": "projects/daraz/src/index.html",
-            "browser": "projects/daraz/src/main.ts",
+            "outputPath": "dist/pathao",
+            "index": "projects/pathao/src/index.html",
+            "browser": "projects/pathao/src/main.ts",
             "polyfills": ["zone.js"],
-            "tsConfig": "projects/daraz/tsconfig.app.json",
+            "tsConfig": "projects/pathao/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              { "glob": "**/*", "input": "projects/daraz/src/assets", "output": "assets" }
+              { "glob": "**/*", "input": "projects/pathao/src/assets", "output": "assets" }
             ],
-            "styles": ["projects/daraz/src/styles.scss"],
+            "styles": ["projects/pathao/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -179,8 +179,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": { "port": 4203 },
           "configurations": {
-            "production": { "buildTarget": "daraz:build:production" },
-            "development": { "buildTarget": "daraz:build:development" }
+            "production": { "buildTarget": "pathao:build:production" },
+            "development": { "buildTarget": "pathao:build:development" }
           },
           "defaultConfiguration": "development"
         },

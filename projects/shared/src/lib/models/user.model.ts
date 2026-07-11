@@ -1,7 +1,4 @@
-// ============================================================
-// Shared User & Auth Models
-// Used by: eSewa, Daraz, Khalti, Default Client
-// ============================================================
+
 
 export interface LoginPayload {
   identifier: string;   // phone, email, or citizen ID

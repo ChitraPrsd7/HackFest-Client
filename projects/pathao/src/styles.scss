@@ -1,0 +1,89 @@
+// =====================================================
+// Pathao Global Styles & Design Tokens
+// Brand: Pathao Nepal — Driver Portal (Ride Sharing)
+// Primary: #E12827 (Bright Red) | Secondary: #111111 (Black)
+// =====================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+// ── Design Tokens ─────────────────────────────────────
+:root {
+  --pathao-red:         #E12827;
+  --pathao-red-dark:    #b91c1c;
+  --pathao-red-light:   #ef4444;
+  --pathao-red-pale:    #fef2f2;
+  --pathao-dark:        #111111;
+  --pathao-dark-nav:    #1a1a1a;
+  --pathao-gray:        #6b7280;
+  --pathao-gray-light:  #f4f4f5;
+  --pathao-white:       #ffffff;
+  --pathao-border:      #e4e4e7;
+  --pathao-shadow:      0 4px 20px rgba(0, 0, 0, 0.08);
+  --pathao-radius:      8px;
+  --pathao-radius-lg:   16px;
+  --font-primary:       'Inter', sans-serif;
+}
+
+// ── Reset ─────────────────────────────────────────────
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: var(--pathao-dark);
+  background: var(--pathao-gray-light);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: var(--font-primary);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+input, select, textarea {
+  font-family: var(--font-primary);
+}
+
+// ── Scrollbar ────────────────────────────────────────
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--pathao-gray-light);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--pathao-red);
+  border-radius: 3px;
+}
+
+// ── Utility Classes ──────────────────────────────────
+.text-red      { color: var(--pathao-red); }
+.text-gray     { color: var(--pathao-gray); }
+.bg-red        { background: var(--pathao-red); }
+.fw-600        { font-weight: 600; }
+.fw-700        { font-weight: 700; }
+.pathao-spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pspin 0.7s linear infinite;
+}
+@keyframes pspin {
+  to { transform: rotate(360deg); }
+}

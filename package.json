@@ -6,11 +6,11 @@
     "start": "ng serve ORCHID-HACKFEST --port 4201",
     "start:default": "ng serve ORCHID-HACKFEST --port 4201",
     "start:esewa": "ng serve esewa --port 4202",
-    "start:daraz": "ng serve daraz --port 4203",
+    "start:pathao": "ng serve pathao --port 4203",
     "start:khalti": "ng serve khalti --port 4204",
     "build": "ng build",
     "build:esewa": "ng build esewa",
-    "build:daraz": "ng build daraz",
+    "build:pathao": "ng build pathao",
     "build:khalti": "ng build khalti",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

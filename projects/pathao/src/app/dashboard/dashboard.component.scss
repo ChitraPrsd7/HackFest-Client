@@ -1,0 +1,677 @@
+// Pathao Driver Dashboard Styling
+// Crimson Red (#E12827) + Dark (#111111)
+
+$red: #E12827;
+$red-dark: #b91c1c;
+$dark-nav: #111111;
+$bg-color: #f4f4f5;
+$white: #ffffff;
+$border: #e4e4e7;
+$gray: #71717a;
+$shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+.pathao-dashboard-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $bg-color;
+  font-family: 'Inter', sans-serif;
+}
+
+// ── HEADER ───────────────────────────────────────────
+.pathao-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $dark-nav;
+  padding: 12px 24px;
+  color: white;
+  border-bottom: 2px solid $red;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.pathao-logo-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .pathao-logo-text {
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.5px;
+    text-transform: lowercase;
+
+    .badge-driver {
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: $red;
+      background: white;
+      padding: 1px 4px;
+      border-radius: 3px;
+      margin-left: 2px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.driver-info {
+  text-align: right;
+
+  .driver-name-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+
+    .driver-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .driver-verified-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      padding: 1px 6px;
+      border-radius: 20px;
+    }
+  }
+
+  .driver-meta {
+    font-size: 11px;
+    color: #a1a1aa;
+    display: block;
+    margin-top: 2px;
+  }
+}
+
+.status-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &.online {
+    background: #10b981;
+    border-color: #10b981;
+    color: white;
+
+    &:hover {
+      background: #059669;
+    }
+  }
+
+  .pulse-dot {
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    animation: toggle-pulse 1.2s infinite;
+  }
+}
+
+@keyframes toggle-pulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+.profile-link-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+  &:hover { background: rgba(255,255,255,0.2); transform: translateY(-1px); }
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// ── MAIN CONTENT GRID ────────────────────────────────
+.pathao-main-content {
+  flex: 1;
+  padding: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// Stats Cards
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+
+  .stat-card {
+    background: $white;
+    border: 1px solid $border;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: $shadow;
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: $gray;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: #111111;
+      line-height: 1.2;
+      margin-bottom: 4px;
+
+      &.text-red { color: $red; }
+      &.low-acceptance { color: #f59e0b; }
+    }
+
+    .stat-sub {
+      font-size: 11px;
+      color: #a1a1aa;
+    }
+  }
+}
+
+// Headings
+.section-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: -0.3px;
+  margin-bottom: 16px;
+}
+
+// ── RIDE OFFER SIMULATOR ──────────────────────────────
+.request-container {
+  background: $white;
+  border: 1px solid $border;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: $shadow;
+}
+
+// Waiting State (Sonar Sonar Sonar)
+.no-request-card {
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .spinner-sonar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .sonar-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid $red;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: sonar-radar 2s infinite linear;
+    }
+
+    .sonar-ring2 {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid $red;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: sonar-radar 2s infinite linear 1s;
+    }
+
+    .sonar-center {
+      position: relative;
+      z-index: 2;
+      font-size: 28px;
+      background: white;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+  }
+
+  .sonar-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: $gray;
+    animation: sonar-fade 1.5s infinite ease-in-out;
+  }
+
+  .sonar-text-offline {
+    font-size: 14px;
+    color: $gray;
+    font-weight: 500;
+  }
+}
+
+@keyframes sonar-radar {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes sonar-fade {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+.red-spinner {
+  width: 24px;
+  height: 24px;
+  border-width: 3px;
+  border-top-color: $red;
+  margin-bottom: 12px;
+}
+
+// Request Offer Active Card
+.request-card {
+  background: #fafafa;
+  border: 1.5px solid $border;
+  border-radius: 12px;
+  padding: 20px;
+  animation: slide-in-card 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    .badge-new {
+      font-size: 9px;
+      font-weight: 800;
+      color: white;
+      background: $red;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .request-distance {
+      font-size: 12px;
+      font-weight: 700;
+      color: #3b82f6;
+    }
+  }
+}
+
+@keyframes slide-in-card {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.request-passenger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $border;
+
+  .passenger-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e4e4e7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .passenger-details {
+    flex: 1;
+    .passenger-name { display: block; font-size: 14px; font-weight: 700; color: #111; }
+    .passenger-rating { display: block; font-size: 11px; color: #f59e0b; font-weight: 600; margin-top: 1px; }
+  }
+
+  .request-fare {
+    text-align: right;
+    .fare-label { display: block; font-size: 10px; color: $gray; font-weight: 700; text-transform: uppercase; }
+    .fare-amount { display: block; font-size: 18px; font-weight: 800; color: $red; margin-top: 1px; }
+  }
+}
+
+// Route Timeline
+.route-visual {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+
+  .route-node {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    .node-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+
+      &.green-dot { background: #10b981; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2); }
+      &.red-dot   { background: #ef4444; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2); }
+    }
+
+    .node-info {
+      .node-label { display: block; font-size: 9px; font-weight: 700; color: $gray; }
+      .node-text  { display: block; font-size: 13px; font-weight: 600; color: #111; margin-top: 2px; }
+    }
+  }
+
+  .route-line {
+    width: 2px;
+    height: 18px;
+    background: #e4e4e7;
+    margin-left: 3px;
+  }
+}
+
+// Request Buttons
+.request-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+
+  button {
+    flex: 1;
+    height: 44px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .decline-btn {
+    background: transparent;
+    border: 1.5px solid #d1d5db;
+    color: #4b5563;
+    &:hover { background: #f3f4f6; }
+  }
+
+  .accept-btn {
+    background: $red;
+    border: none;
+    color: white;
+    box-shadow: 0 4px 12px rgba(225, 40, 39, 0.2);
+    &:hover { background: $red-dark; }
+  }
+}
+
+// ── TRIP HISTORY TABLE ───────────────────────────────
+.history-container {
+  background: $white;
+  border: 1px solid $border;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: $shadow;
+}
+
+.trip-table-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.trip-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
+  padding: 12px 8px;
+  border-bottom: 1px solid #f4f4f5;
+  align-items: center;
+  font-size: 13px;
+
+  &:last-child { border-bottom: none; }
+
+  &.header-row {
+    font-weight: 700;
+    color: $gray;
+    text-transform: uppercase;
+    font-size: 11px;
+    border-bottom: 1.5px solid $border;
+    letter-spacing: 0.5px;
+  }
+
+  .trip-time {
+    color: $gray;
+    font-weight: 500;
+  }
+
+  .trip-location {
+    font-weight: 600;
+    color: #111;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 12px;
+  }
+
+  .trip-amount {
+    font-weight: 700;
+    color: #111;
+  }
+
+  .trip-status-badge {
+    background: #d1fae5;
+    color: #065f46;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    width: fit-content;
+    font-weight: 600;
+  }
+}
+
+// ── ASIDE SIDEBAR COLUMN ─────────────────────────────
+.sidebar-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.panel-card {
+  background: $white;
+  border: 1px solid $border;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: $shadow;
+
+  h3 {
+    font-size: 14px;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+// Actions Grid
+.actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  .action-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 8px;
+    background: #fafafa;
+    border: 1.5px solid $border;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    .tile-icon { font-size: 22px; }
+    .tile-label { font-size: 11px; font-weight: 700; color: #374151; text-align: center; }
+
+    &:hover {
+      border-color: $red;
+      background: rgba(225, 40, 39, 0.04);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Notifications / Surcharges list
+.notif-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.notif-item {
+  border-left: 3px solid $red;
+  padding-left: 12px;
+
+  .notif-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-size: 12px;
+
+    .notif-title { font-weight: 700; color: #111; }
+    .notif-time  { color: $gray; font-size: 10px; }
+  }
+
+  .notif-desc {
+    font-size: 12px;
+    color: $gray;
+    line-height: 1.4;
+  }
+}
+
+// Secure Integration Panel
+.secure-panel {
+  text-align: center;
+  background: linear-gradient(135deg, #111 0%, #1c1c1e 100%);
+  color: white;
+  border: none;
+
+  .secure-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  h3 { color: white; margin-bottom: 8px; }
+  p { font-size: 12px; color: #a1a1aa; line-height: 1.5; }
+}
+
+// ── FOOTER ───────────────────────────────────────────
+.pathao-footer {
+  background: $dark-nav;
+  color: #71717a;
+  padding: 20px 24px;
+  margin-top: auto;
+  border-top: 1px solid #27272a;
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+
+  .socials {
+    display: flex;
+    gap: 16px;
+    a {
+      color: #71717a;
+      &:hover { color: white; }
+    }
+  }
+}
+
+// ── RESPONSIVE ───────────────────────────────────────
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .pathao-header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    .header-right { flex-direction: column; width: 100%; gap: 8px; .driver-info { text-align: center; } }
+  }
+}

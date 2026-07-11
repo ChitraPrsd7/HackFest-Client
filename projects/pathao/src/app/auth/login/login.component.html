@@ -1,0 +1,139 @@
+<div class="pathao-auth-wrap">
+
+  <!-- LEFT PANEL — Bright Red Pathao branding -->
+  <div class="pathao-left-panel">
+    <div class="pathao-left-inner">
+      <!-- Pathao Wing Logo (Stylized wing representing speed/ride share) -->
+      <div class="pathao-logo">
+        <div class="pathao-logo-icon">
+          <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" rx="22" fill="#E12827"/>
+            <path d="M25 45C35 25 65 25 75 40C60 45 45 40 35 55C48 50 65 52 70 65C50 78 30 65 25 45Z" fill="white"/>
+          </svg>
+        </div>
+        <span class="pathao-logo-text">pathao <span class="badge-driver">DRIVER</span></span>
+      </div>
+
+      <!-- Tagline -->
+      <div class="pathao-tagline">
+        <h2>Drive &amp; Earn<br>On Your Schedule</h2>
+        <p>Nepal's number one ride-sharing platform.<br>Register as a driver, complete trips, and get paid instantly.</p>
+      </div>
+
+      <!-- Carousel dots indicator -->
+      <div class="pathao-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL — Driver Login Form -->
+  <div class="pathao-right-panel">
+    <div class="pathao-form-wrap">
+      
+      <div class="pathao-form-header">
+        <h1>Driver Log In</h1>
+        <p>Welcome back! Please enter your driver credentials to go online.</p>
+      </div>
+
+      <!-- Error alert -->
+      <div class="pathao-alert error" *ngIf="loginError">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>{{ loginError }}</span>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+
+        <!-- Mobile Number -->
+        <div class="pathao-field" [class.has-error]="mobileNumber.invalid && mobileNumber.touched">
+          <label for="mobileNumber">Registered Mobile Number</label>
+          <div class="pathao-input-wrap">
+            <span class="input-prefix">+977</span>
+            <input
+              id="mobileNumber"
+              type="tel"
+              formControlName="mobileNumber"
+              placeholder="98XXXXXXXX"
+              autocomplete="username"
+            />
+          </div>
+          <span class="pathao-field-error" *ngIf="mobileNumber.invalid && mobileNumber.touched">
+            Please enter a valid mobile number starting with 98, 97, or 96
+          </span>
+        </div>
+
+        <!-- Password -->
+        <div class="pathao-field" [class.has-error]="password.invalid && password.touched">
+          <label for="password">Driver Password / PIN</label>
+          <div class="pathao-input-wrap">
+            <input
+              id="password"
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="••••••"
+              autocomplete="current-password"
+            />
+            <button type="button" class="toggle-pw" (click)="togglePassword()">
+              <span *ngIf="!showPassword">Show</span>
+              <span *ngIf="showPassword">Hide</span>
+            </button>
+          </div>
+          <span class="pathao-field-error" *ngIf="password.invalid && password.touched">
+            Password is required (min 4 characters)
+          </span>
+        </div>
+
+        <!-- Extra Options -->
+        <div class="pathao-form-options">
+          <a href="#" class="pathao-link forgot-pw">Forgot password?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="pathao-btn-submit" [disabled]="isLoading" id="btn-pathao-login">
+          <span class="pathao-spinner" *ngIf="isLoading"></span>
+          <span *ngIf="!isLoading">Log In &amp; Go Online</span>
+          <span *ngIf="isLoading">Verifying Account...</span>
+        </button>
+
+      </form>
+
+      <!-- OR Divider -->
+      <div class="pathao-divider">
+        <span class="pathao-divider-line"></span>
+        <span class="pathao-divider-text">वा / OR</span>
+        <span class="pathao-divider-line"></span>
+      </div>
+
+      <!-- 1ID Nepal SSO Login Button -->
+      <button type="button" class="pathao-btn-oneid" (click)="loginWith1ID()" id="btn-oneid-nepal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="18" height="18" rx="4" fill="#dc2626"/>
+          <text x="12" y="16" text-anchor="middle" fill="white" font-size="10" font-weight="900" font-family="Inter, sans-serif">1ID</text>
+        </svg>
+        <span class="oneid-label">
+          <span class="oneid-main">Login with 1ID Nepal</span>
+          <span class="oneid-sub">राष्ट्रिय डिजिटल पहिचान (Driver SSO)</span>
+        </span>
+        <svg class="oneid-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+
+      <!-- Form Footer -->
+      <div class="pathao-form-footer">
+        <span>Want to earn money?</span>
+        <button type="button" class="pathao-register-link" (click)="goToRegister()">
+          Register as Pathao Driver
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

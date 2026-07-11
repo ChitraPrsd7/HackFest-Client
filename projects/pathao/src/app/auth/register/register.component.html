@@ -1,0 +1,207 @@
+<div class="pathao-auth-wrap">
+
+  <!-- LEFT PANEL — Bright Red Pathao branding -->
+  <div class="pathao-left-panel">
+    <div class="pathao-left-inner">
+      <div class="pathao-logo">
+        <div class="pathao-logo-icon">
+          <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" rx="22" fill="#E12827"/>
+            <path d="M25 45C35 25 65 25 75 40C60 45 45 40 35 55C48 50 65 52 70 65C50 78 30 65 25 45Z" fill="white"/>
+          </svg>
+        </div>
+        <span class="pathao-logo-text">pathao <span class="badge-driver">DRIVER</span></span>
+      </div>
+
+      <div class="pathao-tagline">
+        <h2>Drive &amp; Earn<br>On Your Schedule</h2>
+        <p>Nepal's number one ride-sharing platform.<br>Register as a driver, complete trips, and get paid instantly.</p>
+      </div>
+
+      <div class="pathao-dots">
+        <span class="dot"></span>
+        <span class="dot active"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL — Registration Form -->
+  <div class="pathao-right-panel">
+    <div class="pathao-form-wrap">
+
+      <div class="pathao-form-header">
+        <h1>Driver Registration</h1>
+        <p>Join the Pathao fleet and start earning today!</p>
+      </div>
+
+      <!-- Success / Error -->
+      <div class="pathao-alert success" *ngIf="registerSuccess">✓ {{ registerSuccess }}</div>
+      <div class="pathao-alert error" *ngIf="registerError">⚠ {{ registerError }}</div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+
+        <!-- Full Name -->
+        <div class="pathao-field" [class.has-error]="fullName.invalid && fullName.touched">
+          <label for="fullName">Full Name</label>
+          <div class="pathao-input-wrap">
+            <input id="fullName" type="text" formControlName="fullName" placeholder="Enter full name"/>
+          </div>
+          <span class="pathao-field-error" *ngIf="fullName.invalid && fullName.touched">Full name is required</span>
+        </div>
+
+        <!-- Email Address -->
+        <div class="pathao-field" [class.has-error]="email.invalid && email.touched">
+          <label for="regEmail">Email Address</label>
+          <div class="pathao-input-wrap">
+            <input id="regEmail" type="email" formControlName="email" placeholder="eg.youremail@example.com"/>
+          </div>
+          <span class="pathao-field-error" *ngIf="email.invalid && email.touched">Valid email is required</span>
+        </div>
+
+        <!-- Mobile Number -->
+        <div class="pathao-field" [class.has-error]="mobileNumber.invalid && mobileNumber.touched">
+          <label for="regMobile">Mobile Number</label>
+          <div class="pathao-input-wrap">
+            <span class="input-prefix">+977</span>
+            <input id="regMobile" type="tel" formControlName="mobileNumber" placeholder="98XXXXXXXX"/>
+          </div>
+          <span class="pathao-field-error" *ngIf="mobileNumber.invalid && mobileNumber.touched">
+            Enter a valid Nepal mobile number (98/97/96)
+          </span>
+        </div>
+
+        <!-- Vehicle Type Selector -->
+        <div class="pathao-field">
+          <label>Vehicle Type</label>
+          <div class="pathao-vehicle-group">
+            <button type="button"
+              class="vehicle-btn"
+              [class.selected]="selectedVehicle === 'Bike'"
+              (click)="selectVehicle('Bike')"
+              id="vehicle-bike">
+              <span class="vehicle-icon">🏍️</span>
+              <span class="vehicle-name">Bike</span>
+            </button>
+            <button type="button"
+              class="vehicle-btn"
+              [class.selected]="selectedVehicle === 'Car'"
+              (click)="selectVehicle('Car')"
+              id="vehicle-car">
+              <span class="vehicle-icon">🚗</span>
+              <span class="vehicle-name">Car</span>
+            </button>
+            <button type="button"
+              class="vehicle-btn"
+              [class.selected]="selectedVehicle === 'Cycle'"
+              (click)="selectVehicle('Cycle')"
+              id="vehicle-cycle">
+              <span class="vehicle-icon">🚲</span>
+              <span class="vehicle-name">Cycle</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Driving License Number -->
+        <div class="pathao-field" [class.has-error]="licenseNumber.invalid && licenseNumber.touched">
+          <label for="licenseNumber">Driving License Number</label>
+          <div class="pathao-input-wrap">
+            <input id="licenseNumber" type="text" formControlName="licenseNumber" placeholder="Enter license number"/>
+          </div>
+          <span class="pathao-field-error" *ngIf="licenseNumber.invalid && licenseNumber.touched">License number is required</span>
+        </div>
+
+        <!-- Bluebook Number -->
+        <div class="pathao-field" [class.has-error]="bluebookNumber.invalid && bluebookNumber.touched">
+          <label for="bluebookNumber">Vehicle Bluebook Number</label>
+          <div class="pathao-input-wrap">
+            <input id="bluebookNumber" type="text" formControlName="bluebookNumber" placeholder="Enter bluebook number"/>
+          </div>
+          <span class="pathao-field-error" *ngIf="bluebookNumber.invalid && bluebookNumber.touched">Bluebook number is required</span>
+        </div>
+
+        <!-- Gender Selector -->
+        <div class="pathao-field">
+          <label>Gender</label>
+          <div class="pathao-gender-group">
+            <button type="button"
+              class="gender-btn"
+              [class.selected]="selectedGender === 'Male'"
+              (click)="selectGender('Male')"
+              id="gender-male">Male</button>
+            <button type="button"
+              class="gender-btn"
+              [class.selected]="selectedGender === 'Female'"
+              (click)="selectGender('Female')"
+              id="gender-female">Female</button>
+            <button type="button"
+              class="gender-btn"
+              [class.selected]="selectedGender === 'Other'"
+              (click)="selectGender('Other')"
+              id="gender-other">Other</button>
+          </div>
+        </div>
+
+        <!-- Promo Code -->
+        <div class="pathao-field">
+          <button type="button" class="pathao-promo-toggle" (click)="togglePromo()" id="btn-promo">
+            Have Referal / Promocode ?
+          </button>
+          <div *ngIf="showPromoInput" class="pathao-input-wrap promo-input-container">
+            <input
+              type="text"
+              formControlName="promoCode"
+              placeholder="Enter promocode"
+              class="pathao-promo-input"
+            />
+          </div>
+        </div>
+
+        <!-- Terms & Conditions -->
+        <div class="pathao-field pathao-terms">
+          <label class="pathao-checkbox-label">
+            <input type="checkbox" formControlName="acceptedTerms" id="acceptedTerms"/>
+            <span>
+              I agree to the <a href="#" class="pathao-link">Terms &amp; Conditions</a> and
+              <a href="#" class="pathao-link">Privacy Policy</a> for Pathao Drivers.
+            </span>
+          </label>
+        </div>
+
+        <!-- reCAPTCHA Mock -->
+        <div class="pathao-recaptcha">
+          <div class="recaptcha-box">
+            <input type="checkbox" class="recaptcha-check" id="captcha-check"/>
+            <label for="captcha-check" class="recaptcha-text">I'm not a robot</label>
+            <div class="recaptcha-logo">
+              <svg width="24" height="24" viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="32" r="32" fill="#f9f9f9"/>
+                <path d="M32 12 L52 32 L32 52 L12 32 Z" fill="none" stroke="#4285f4" stroke-width="3"/>
+                <circle cx="32" cy="32" r="10" fill="#4285f4"/>
+              </svg>
+              <span class="recaptcha-label">reCAPTCHA</span>
+              <span class="recaptcha-sub">Privacy - Terms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Create Button -->
+        <button type="submit" class="pathao-btn-submit" [disabled]="isLoading" id="btn-pathao-create">
+          <span class="pathao-spinner" *ngIf="isLoading"></span>
+          <span *ngIf="!isLoading">Register as Driver</span>
+          <span *ngIf="isLoading">Submitting Application...</span>
+        </button>
+
+      </form>
+
+      <!-- Already have account -->
+      <div class="pathao-already-token">
+        <button type="button" (click)="goToLogin()" id="btn-already-token">
+          ALREADY HAVE DRIVER ACCOUNT?
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

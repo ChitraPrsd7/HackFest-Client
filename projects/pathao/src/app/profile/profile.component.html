@@ -1,0 +1,337 @@
+<div class="profile-page">
+
+  <!-- TOP NAV BAR -->
+  <nav class="profile-topbar">
+    <button class="back-btn" (click)="goToDashboard()" id="btn-back-dashboard">
+      <span class="back-arrow">←</span> Dashboard
+    </button>
+    <span class="topbar-title">Driver Profile</span>
+    <button class="logout-btn" (click)="logout()" id="btn-logout">Log Out</button>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <div class="profile-hero">
+    <div class="hero-bg-glow"></div>
+    <div class="hero-inner">
+
+      <!-- Avatar + Identity -->
+      <div class="avatar-block">
+        <div class="avatar-ring" [class.online]="driver.isOnline">
+          <div class="avatar-circle">{{ avatarInitials }}</div>
+        </div>
+        <div class="online-badge" [class.active]="driver.isOnline">
+          {{ driver.isOnline ? '● Online' : '○ Offline' }}
+        </div>
+      </div>
+
+      <!-- Hero Driver Info -->
+      <div class="hero-info">
+        <div class="driver-name-row">
+          <h1>{{ driver.fullName }}</h1>
+          <span class="verified-1id" *ngIf="driver.isVerified1ID" title="1ID Nepal Verified">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#1DA462"/><path d="M7 12.5l3.5 3.5 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            1ID Verified
+          </span>
+        </div>
+        <div class="hero-meta">
+          <span>📍 {{ driver.address }}</span>
+          <span>📅 Driver since {{ driver.joinedDate }}</span>
+        </div>
+
+        <!-- Rating Bar -->
+        <div class="rating-row">
+          <div class="star-rating">
+            <span class="star" *ngFor="let s of [1,2,3,4,5]" [class.filled]="s <= driver.rating">★</span>
+          </div>
+          <strong>{{ driver.rating }}</strong>
+          <span class="rating-label">/ 5.0 rating</span>
+        </div>
+
+        <!-- Badges -->
+        <div class="badges-row">
+          <div class="badge-chip" *ngFor="let b of badges" [title]="b.desc">
+            <span class="badge-icon">{{ b.icon }}</span>
+            <span class="badge-label">{{ b.label }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Stats -->
+      <div class="hero-stats">
+        <div class="stat-pill">
+          <span class="stat-num">{{ driver.totalTrips | number }}</span>
+          <span class="stat-lbl">Total Trips</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-num">Rs. {{ (driver.totalEarnings / 1000).toFixed(0) }}K</span>
+          <span class="stat-lbl">Lifetime Earnings</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-num">{{ driver.acceptanceRate }}%</span>
+          <span class="stat-lbl">Acceptance Rate</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-num">{{ driver.completionRate }}%</span>
+          <span class="stat-lbl">Completion Rate</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SAVE SUCCESS TOAST -->
+  <div class="toast-success" *ngIf="saveSuccess">
+    <span>✓</span> Profile updated successfully!
+  </div>
+
+  <!-- TAB NAV -->
+  <div class="profile-tabs">
+    <button class="tab-btn" [class.active]="activeTab === 'overview'" (click)="setTab('overview')" id="tab-overview">Overview</button>
+    <button class="tab-btn" [class.active]="activeTab === 'vehicle'" (click)="setTab('vehicle')" id="tab-vehicle">Vehicle & License</button>
+    <button class="tab-btn" [class.active]="activeTab === 'documents'" (click)="setTab('documents')" id="tab-documents">Documents</button>
+    <button class="tab-btn" [class.active]="activeTab === 'earnings'" (click)="setTab('earnings')" id="tab-earnings">Earnings</button>
+  </div>
+
+  <!-- TAB CONTENT -->
+  <div class="profile-content">
+
+    <!-- ========== OVERVIEW TAB ========== -->
+    <div *ngIf="activeTab === 'overview'" class="tab-panel fade-in">
+
+      <!-- Personal Info Card -->
+      <div class="profile-card">
+        <div class="card-header">
+          <h2>Personal Information</h2>
+          <button class="edit-btn" (click)="toggleEditMode()" id="btn-edit-profile">
+            {{ isEditMode ? '✕ Cancel' : '✎ Edit Profile' }}
+          </button>
+        </div>
+
+        <!-- VIEW MODE -->
+        <div class="info-grid" *ngIf="!isEditMode">
+          <div class="info-item">
+            <span class="info-label">Full Name</span>
+            <span class="info-value">{{ driver.fullName }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Email Address</span>
+            <span class="info-value">{{ driver.email }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Mobile Number</span>
+            <span class="info-value">+977 {{ driver.mobileNumber }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Gender</span>
+            <span class="info-value">{{ driver.gender }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Date of Birth</span>
+            <span class="info-value">{{ driver.dob }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Address</span>
+            <span class="info-value">{{ driver.address }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">1ID NID Number</span>
+            <span class="info-value nid-val">
+              <span class="nid-tag">{{ driver.nidNumber }}</span>
+              <span class="verified-tag" *ngIf="driver.isVerified1ID">✓ Verified</span>
+            </span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Emergency Contact</span>
+            <span class="info-value">+977 {{ driver.emergencyContact }}</span>
+          </div>
+        </div>
+
+        <!-- EDIT MODE -->
+        <form class="edit-form" *ngIf="isEditMode" [formGroup]="editForm" (ngSubmit)="saveProfile()">
+          <div class="edit-grid">
+            <div class="edit-field">
+              <label>Full Name</label>
+              <input type="text" formControlName="fullName" placeholder="Full name" id="edit-fullName"/>
+            </div>
+            <div class="edit-field">
+              <label>Email Address</label>
+              <input type="email" formControlName="email" placeholder="Email" id="edit-email"/>
+            </div>
+            <div class="edit-field">
+              <label>Mobile Number</label>
+              <div class="input-prefix-wrap">
+                <span class="input-pfx">+977</span>
+                <input type="tel" formControlName="mobileNumber" placeholder="98XXXXXXXX" id="edit-mobile"/>
+              </div>
+            </div>
+            <div class="edit-field">
+              <label>Emergency Contact</label>
+              <div class="input-prefix-wrap">
+                <span class="input-pfx">+977</span>
+                <input type="tel" formControlName="emergencyContact" placeholder="98XXXXXXXX" id="edit-emergency"/>
+              </div>
+            </div>
+            <div class="edit-field full-width">
+              <label>Address</label>
+              <input type="text" formControlName="address" placeholder="Your address" id="edit-address"/>
+            </div>
+          </div>
+          <div class="edit-actions">
+            <button type="submit" class="save-btn" [disabled]="editForm.invalid" id="btn-save-profile">Save Changes</button>
+            <button type="button" class="cancel-btn" (click)="toggleEditMode()">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Payment & Wallet Card -->
+      <div class="profile-card">
+        <div class="card-header">
+          <h2>Payment & Wallet</h2>
+        </div>
+        <div class="payment-grid">
+          <div class="payment-item bank">
+            <div class="pay-icon">🏦</div>
+            <div class="pay-details">
+              <span class="pay-name">{{ driver.bankName }}</span>
+              <span class="pay-sub">Account {{ driver.bankAccount }}</span>
+            </div>
+            <span class="pay-status linked">Linked</span>
+          </div>
+          <div class="payment-item esewa" [class.linked-item]="driver.esewaLinked">
+            <div class="pay-icon">🟢</div>
+            <div class="pay-details">
+              <span class="pay-name">eSewa</span>
+              <span class="pay-sub">Digital Wallet</span>
+            </div>
+            <span class="pay-status" [class.linked]="driver.esewaLinked" [class.unlinked]="!driver.esewaLinked">
+              {{ driver.esewaLinked ? 'Linked' : 'Link Now' }}
+            </span>
+          </div>
+          <div class="payment-item khalti" [class.linked-item]="driver.khaltiLinked">
+            <div class="pay-icon">💜</div>
+            <div class="pay-details">
+              <span class="pay-name">Khalti</span>
+              <span class="pay-sub">Digital Wallet</span>
+            </div>
+            <span class="pay-status" [class.linked]="driver.khaltiLinked" [class.unlinked]="!driver.khaltiLinked">
+              {{ driver.khaltiLinked ? 'Linked' : 'Link Now' }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========== VEHICLE TAB ========== -->
+    <div *ngIf="activeTab === 'vehicle'" class="tab-panel fade-in">
+      <div class="profile-card">
+        <div class="card-header">
+          <h2>Vehicle Information</h2>
+        </div>
+        <div class="vehicle-hero">
+          <div class="vehicle-icon-big">🏍️</div>
+          <div class="vehicle-details-main">
+            <h3>{{ driver.vehicleModel }}</h3>
+            <div class="vehicle-plate">{{ driver.vehicleNumber }}</div>
+          </div>
+        </div>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Vehicle Type</span>
+            <span class="info-value">{{ driver.vehicleType }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Model</span>
+            <span class="info-value">{{ driver.vehicleModel }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Plate Number</span>
+            <span class="info-value plate-badge">{{ driver.vehicleNumber }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Color</span>
+            <span class="info-value">{{ driver.vehicleColor }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Driving License</span>
+            <span class="info-value">{{ driver.licenseNumber }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Bluebook Number</span>
+            <span class="info-value">{{ driver.bluebookNumber }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== DOCUMENTS TAB ========== -->
+    <div *ngIf="activeTab === 'documents'" class="tab-panel fade-in">
+      <div class="profile-card">
+        <div class="card-header">
+          <h2>Verification Documents</h2>
+        </div>
+        <div class="documents-list">
+          <div class="doc-item" *ngFor="let doc of documents">
+            <div class="doc-icon" [ngClass]="'status-' + doc.status.toLowerCase()">
+              <span *ngIf="doc.status === 'Verified'">✓</span>
+              <span *ngIf="doc.status === 'Pending'">⏳</span>
+              <span *ngIf="doc.status === 'Rejected'">✗</span>
+            </div>
+            <div class="doc-details">
+              <span class="doc-name">{{ doc.name }}</span>
+              <span class="doc-expiry" *ngIf="doc.expiryDate">Expires: {{ doc.expiryDate }}</span>
+              <span class="doc-expiry" *ngIf="!doc.expiryDate">Under Review</span>
+            </div>
+            <span class="doc-status-badge" [ngClass]="'badge-' + doc.status.toLowerCase()">
+              {{ doc.status }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== EARNINGS TAB ========== -->
+    <div *ngIf="activeTab === 'earnings'" class="tab-panel fade-in">
+      <div class="profile-card">
+        <div class="card-header">
+          <h2>Earnings Overview</h2>
+        </div>
+
+        <div class="earnings-summary">
+          <div class="earn-tile">
+            <span class="earn-icon">💰</span>
+            <span class="earn-amount">Rs. {{ driver.totalEarnings | number }}</span>
+            <span class="earn-label">Lifetime Total</span>
+          </div>
+          <div class="earn-tile highlight">
+            <span class="earn-icon">📅</span>
+            <span class="earn-amount">Rs. {{ monthlyStats[monthlyStats.length-1].earnings | number }}</span>
+            <span class="earn-label">This Month</span>
+          </div>
+          <div class="earn-tile">
+            <span class="earn-icon">🚗</span>
+            <span class="earn-amount">{{ monthlyStats[monthlyStats.length-1].trips }}</span>
+            <span class="earn-label">Trips This Month</span>
+          </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="chart-section">
+          <h3 class="chart-title">Monthly Earnings (NPR)</h3>
+          <div class="bar-chart">
+            <div class="bar-group" *ngFor="let stat of monthlyStats">
+              <div class="bar-wrap">
+                <div class="bar-fill" [style.height.%]="getBarHeight(stat.earnings)">
+                  <span class="bar-tooltip">Rs. {{ stat.earnings | number }}</span>
+                </div>
+              </div>
+              <span class="bar-label">{{ stat.month }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

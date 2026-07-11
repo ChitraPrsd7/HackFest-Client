@@ -1,0 +1,237 @@
+<div class="pathao-dashboard-shell">
+
+  <!-- ══ HEADER ══════════════════════════════════════════════ -->
+  <header class="pathao-header">
+    <div class="header-left">
+      <div class="pathao-logo-nav">
+        <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="22" fill="#E12827"/>
+          <path d="M25 45C35 25 65 25 75 40C60 45 45 40 35 55C48 50 65 52 70 65C50 78 30 65 25 45Z" fill="white"/>
+        </svg>
+        <span class="pathao-logo-text">pathao <span class="badge-driver">DRIVER</span></span>
+      </div>
+    </div>
+
+    <!-- Active Driver Status & Details -->
+    <div class="header-right">
+      <div class="driver-info">
+        <div class="driver-name-wrap">
+          <span class="driver-name">{{ driver.fullName }}</span>
+          <span class="driver-verified-badge" *ngIf="driver.isVerified1ID" title="1ID Verified Driver">
+            🛡️ 1ID Verified
+          </span>
+        </div>
+        <span class="driver-meta">{{ driver.vehicleNumber }} · {{ driver.vehicleType }}</span>
+      </div>
+
+      <!-- Online / Offline toggle button -->
+      <button 
+        class="status-toggle-btn" 
+        [class.online]="driver.isOnline"
+        (click)="toggleOnlineStatus()">
+        <span class="pulse-dot" *ngIf="driver.isOnline"></span>
+        {{ driver.isOnline ? 'ONLINE' : 'OFFLINE' }}
+      </button>
+
+      <button class="profile-link-btn" (click)="goToProfile()" id="btn-my-profile" title="View My Profile">
+        👤 My Profile
+      </button>
+
+      <button class="logout-btn" (click)="logout()" title="Logout">
+        Sign Out
+      </button>
+    </div>
+  </header>
+
+  <!-- ══ MAIN CONTENT ════════════════════════════════════════ -->
+  <main class="pathao-main-content">
+
+    <div class="dashboard-grid">
+
+      <!-- LEFT COLUMN: Stats + Active Requests + History -->
+      <div class="main-column">
+
+        <!-- Stats Widgets -->
+        <section class="stats-container">
+          <div class="stat-card">
+            <span class="stat-label">Today's Earnings</span>
+            <span class="stat-value text-red">Rs. {{ todayEarnings | number:'1.2-2' }}</span>
+            <span class="stat-sub">Multiplier active (1ID verified)</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Trips Completed</span>
+            <span class="stat-value">{{ totalTrips }}</span>
+            <span class="stat-sub">Target: 15 trips</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Online Hours</span>
+            <span class="stat-value">{{ onlineHours }} hrs</span>
+            <span class="stat-sub">Today's session</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Acceptance Rate</span>
+            <span class="stat-value" [class.low-acceptance]="acceptanceRate < 80">{{ acceptanceRate }}%</span>
+            <span class="stat-sub">Min requirement: 80%</span>
+          </div>
+        </section>
+
+        <!-- Active Ride Request Dispatch Simulator -->
+        <section class="request-container">
+          <h2 class="section-title">Ride Dispatch Center</h2>
+          
+          <!-- No Request State -->
+          <div class="no-request-card" *ngIf="!activeRequest && !isLoadingRequest">
+            <div class="spinner-sonar" *ngIf="driver.isOnline">
+              <span class="sonar-ring"></span>
+              <span class="sonar-ring2"></span>
+              <span class="sonar-center">🏍️</span>
+            </div>
+            <p *ngIf="driver.isOnline" class="sonar-text">Waiting for nearby ride requests...</p>
+            <p *ngIf="!driver.isOnline" class="sonar-text-offline">You are currently OFFLINE. Go online to receive ride bookings.</p>
+          </div>
+
+          <!-- Loading state during transition -->
+          <div class="no-request-card" *ngIf="isLoadingRequest">
+            <span class="pathao-spinner red-spinner"></span>
+            <p class="sonar-text">Processing ride booking...</p>
+          </div>
+
+          <!-- Active Booking Offer -->
+          <div class="request-card" *ngIf="activeRequest && !isLoadingRequest">
+            <div class="request-header">
+              <span class="badge-new">NEW BOOKING REQUEST</span>
+              <span class="request-distance">📍 {{ activeRequest.distance }} away</span>
+            </div>
+
+            <div class="request-passenger">
+              <div class="passenger-avatar">👤</div>
+              <div class="passenger-details">
+                <span class="passenger-name">{{ activeRequest.passengerName }}</span>
+                <span class="passenger-rating">⭐ {{ activeRequest.passengerRating }} rating</span>
+              </div>
+              <div class="request-fare">
+                <span class="fare-label">Est. Fare</span>
+                <span class="fare-amount">Rs. {{ activeRequest.fare }}</span>
+              </div>
+            </div>
+
+            <!-- Route Visual Timeline -->
+            <div class="route-visual">
+              <div class="route-node pickup">
+                <span class="node-dot green-dot"></span>
+                <div class="node-info">
+                  <span class="node-label">PICKUP POINT</span>
+                  <span class="node-text">{{ activeRequest.pickupLocation }}</span>
+                </div>
+              </div>
+              <div class="route-line"></div>
+              <div class="route-node dropoff">
+                <span class="node-dot red-dot"></span>
+                <div class="node-info">
+                  <span class="node-label">DROPOFF POINT</span>
+                  <span class="node-text">{{ activeRequest.dropoffLocation }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Decline / Accept buttons -->
+            <div class="request-actions">
+              <button class="decline-btn" (click)="rejectRequest()">Decline Offer</button>
+              <button class="accept-btn" (click)="acceptRequest()">ACCEPT BOOKING</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Trip logs history -->
+        <section class="history-container">
+          <h2 class="section-title">Today's Completed Trips</h2>
+          <div class="trip-table-wrapper">
+            <div class="trip-row header-row">
+              <span>Time</span>
+              <span>Pickup</span>
+              <span>Dropoff</span>
+              <span>Fare</span>
+              <span>Status</span>
+            </div>
+
+            <div class="trip-row" *ngFor="let trip of tripLogs">
+              <span class="trip-time">{{ trip.time }}</span>
+              <span class="trip-location" [title]="trip.pickup">{{ trip.pickup }}</span>
+              <span class="trip-location" [title]="trip.dropoff">{{ trip.dropoff }}</span>
+              <span class="trip-amount">Rs. {{ trip.fare }}</span>
+              <span class="trip-status-badge">{{ trip.status }}</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- RIGHT COLUMN: Driver Panel, Surcharges & Info -->
+      <aside class="sidebar-column">
+
+        <!-- Quick actions for drivers -->
+        <div class="panel-card actions-panel">
+          <h3>Quick Controls</h3>
+          <div class="actions-grid">
+            <button class="action-tile">
+              <span class="tile-icon">🏦</span>
+              <span class="tile-label">Transfer Earnings</span>
+            </button>
+            <button class="action-tile">
+              <span class="tile-icon">🏷️</span>
+              <span class="tile-label">Fuel Coupons</span>
+            </button>
+            <button class="action-tile">
+              <span class="tile-icon">📄</span>
+              <span class="tile-label">Doc Status</span>
+            </button>
+            <button class="action-tile">
+              <span class="tile-icon">💬</span>
+              <span class="tile-label">Support Help</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- System Notifications & Surcharges -->
+        <div class="panel-card notification-panel">
+          <h3>Fleet Broadcasts</h3>
+          <div class="notif-list">
+            <div class="notif-item" *ngFor="let notif of recentNotifications">
+              <div class="notif-header">
+                <span class="notif-title">{{ notif.title }}</span>
+                <span class="notif-time">{{ notif.time }}</span>
+              </div>
+              <p class="notif-desc">{{ notif.desc }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1ID Verification Card -->
+        <div class="panel-card secure-panel">
+          <div class="secure-icon">🛡️</div>
+          <h3>National ID Integrated</h3>
+          <p>Your driver account is verified using Nepal's 1ID system. Safe travel and transparent logging is enabled.</p>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- ══ FOOTER ══════════════════════════════════════════════ -->
+  <footer class="pathao-footer">
+    <div class="footer-inner">
+      <span>© 2026 Pathao Nepal. Driver Fleet Management Portal. All rights reserved.</span>
+      <span class="socials">
+        <a href="#">Driver Center</a> · 
+        <a href="#">Support Portal</a> · 
+        <a href="#">Terms &amp; Policies</a>
+      </span>
+    </div>
+  </footer>
+
+</div>
