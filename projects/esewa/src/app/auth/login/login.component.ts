@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   showPassword = false;
   loginError = '';
 
-  /** Must match what is registered on the backend for client 'eSewa-app' */
-  private readonly oneIdClientId   = 'eSewa-app';
+
+  private readonly oneIdClientId   = 'esewa-ZPnAcr';
   private readonly oneIdRedirectUri = 'http://localhost:4202/callback';
 
   constructor(

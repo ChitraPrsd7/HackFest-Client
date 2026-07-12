@@ -55,7 +55,7 @@ import { OneIdService } from '@shared/core/services/one-id.service';
 export class CallbackComponent implements OnInit {
 
   /** Must match backend registered client */
-  private readonly clientId    = 'eSewa-app';
+  private readonly clientId    = 'esewa-ZPnAcr';
   private readonly redirectUri = 'http://localhost:4202/callback';
 
   error = '';
